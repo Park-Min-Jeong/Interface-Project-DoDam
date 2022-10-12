@@ -15,8 +15,8 @@ urlpatterns = [
     # re_path(r"^.*\.*", views.pages, name="pages"),
 
     # 추가한 내용
-    path("support/", views.support_bulletin, name="support"),
-    path("route/", views.route_bulletin, name="route"),
+    path("supportBulletin/", views.support_bulletin, name="supportBulletin"),
+    path("routeBulletin/", views.route_bulletin, name="routeBulletin"),
     path("search/", views.search, name="search"),
     path("supportWrite/", views.support_write, name="supportWrite"),
     path("supportView/", views.support_view, name="supportView"),
