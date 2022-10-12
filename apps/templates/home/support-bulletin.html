@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Accordions {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section section-header pb-11 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">문의 게시판</h1>
+                        <p class="lead">문의 사항 작성</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg">
+            <h2>작성 필요</h2>
+            <button class="btn btn-primary" type="button">작성</button>
+        </section>
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

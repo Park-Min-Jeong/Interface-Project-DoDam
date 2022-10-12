@@ -1,0 +1,73 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Accordions {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section section-header pb-11 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">문화재 검색</h1>
+                        <p class="lead">시대별로 문화재를 검색할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- content -->
+        <section class="section section-lg">
+            <div class="container mt-n10">
+                <div class="row">
+                    <div class="col-2">
+                        <!-- ui-cards.html에서 가져옴-->
+                        <div class="card shadow text-center">
+                            <!-- Header -->
+                            <div class="card-header bg-white p-3">
+                                <h3 class="text-primary mt-auto mb-auto">시대</h3>
+                            </div>
+                            <!-- Content -->
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                                    <label class="form-check-label" for="defaultCheck1">First Option</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                    <label class="form-check-label" for="defaultCheck2">Second Option</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                    <label class="form-check-label" for="defaultCheck3">Third Option</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 지도 -->
+                    <!-- contact.html에서 가져옴 -->
+                    <div class="col-10">
+                        <iframe class="map rounded" id="gmap_canvas" src="https://maps.google.com/maps?q=san%20francisco&t=&z=8&ie=UTF8&iwloc=&output=embed"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <div class="section py-0">
+
+        </div>
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Accordions {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section section-header pb-11 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">탐방 루트 작성</h1>
+                        <p class="lead">문의 사항 작성</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg">
+            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <button class="btn btn-primary" type="button">검색</button>
+                        <form>
+                            <textarea placeholder="comments" rows="3"></textarea>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

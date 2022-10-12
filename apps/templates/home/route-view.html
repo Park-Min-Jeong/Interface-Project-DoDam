@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Accordions {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section section-header pb-11 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">문화재 검색</h1>
+                        <p class="lead">시대별로 문화재를 검색할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg">
+            <h2>작성 필요</h2>
+        </section>
+
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
