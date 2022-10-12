@@ -27,7 +27,7 @@ def support_write(request):
 
 
 def support_view(request):
-    return render(request, "home/route-support.html")
+    return render(request, "home/support-view.html")
 
 
 def route_bulletin(request):
