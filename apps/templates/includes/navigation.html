@@ -4,7 +4,7 @@
             <div class="container position-relative">
 
                 <!-- 로고 -->
-                <a class="navbar-brand me-lg-5" href="./index.html">
+                <a class="navbar-brand me-lg-5" href="{% url 'home' %}">
                     <img class="navbar-brand-dark" src="{{ ASSETS_ROOT }}/img/brand/light.svg" alt="Logo light">
                     <img class="navbar-brand-light" src="{{ ASSETS_ROOT }}/img/brand/dark.svg" alt="Logo dark">
                 </a>
@@ -14,7 +14,7 @@
                     <div class="navbar-collapse-header">
                         <div class="row">
                             <div class="col-6 collapse-brand">
-                                <a href="./index.html">
+                                <a href="{% url 'home' %}">
                                     <img src="{{ ASSETS_ROOT }}/img/brand/dark.svg" alt="Themesberg logo">
                                 </a>
                             </div>
@@ -32,18 +32,18 @@
                                 <span class="fas fa-angle-down nav-link-arrow ms-1"></span>
                             </a>
                             <div class="dropdown-menu dropdown-megamenu-lg" aria-labelledby="heritageDropdown">
-                                    <div class="col ps-0 py-3">
-                                        <ul class="list-style-none">
-                                            <li><a class="dropdown-item" href="/search.html">문화재 검색</a></li>
-                                            <li><a class="dropdown-item" href="/route-bulletin.html">탐방 루트</a></li>
-                                        </ul>
-                                    </div>
+                                <div class="col ps-0 py-3">
+                                    <ul class="list-style-none">
+                                        <li><a class="dropdown-item" href="{% url 'search' %}">문화재 검색</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'route' %}">탐방 루트</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </li>
 
                         <!-- 문의 -->
                         <li class="nav-item link">
-                            <a href="/support-bulletin.html" class="nav-link" id="supportNavItem" aria-expanded="false">
+                            <a href="{% url 'support' %}" class="nav-link" id="supportNavItem" aria-expanded="false">
                                 문의
                             </a>
                         </li>
