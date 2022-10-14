@@ -36,9 +36,13 @@ class heritage(models.Model):
 class support(models.Model):
     id = models.IntegerField(primary_key=True)
     writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    writeDT = models.DateTimeField(auto_now_add=True)
+    title = models.TextField()
     question = models.TextField()
     answer = models.TextField(null=True)
-    answered = models.CharField(max_length=1)
+    answered = models.IntegerField(choices=[(1, "y"), (0, "n")])
+    # home.support.answered: (fields.E005)
+    # 'choices' must be an iterable containing (actual value, human readable name) tuples.
 
 
 class route(models.Model):
@@ -51,3 +55,4 @@ class routeDetail(models.Model):
     post = models.ForeignKey(route, on_delete=models.CASCADE)
     order = models.IntegerField()
     ccbaCpno = models.ForeignKey(heritage, on_delete=models.CASCADE)
+    comment = models.TextField(null=True)
