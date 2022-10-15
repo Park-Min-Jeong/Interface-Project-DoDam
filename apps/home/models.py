@@ -35,7 +35,7 @@ class heritage(models.Model):
 
 
 class support(models.Model):
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True)
     writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     writeDT = models.DateTimeField(auto_now_add=True)
     title = models.TextField()
@@ -47,12 +47,12 @@ class support(models.Model):
 
 
 class route(models.Model):
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True)
     writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class routeDetail(models.Model):
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True)
     post = models.ForeignKey(route, on_delete=models.CASCADE)
     order = models.IntegerField()
     ccbaCpno = models.ForeignKey(heritage, on_delete=models.CASCADE)

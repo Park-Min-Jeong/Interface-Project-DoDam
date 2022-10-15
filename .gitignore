@@ -32,3 +32,4 @@ apps/static/assets/.temp
 
 # PyCharm
 .idea/
+apps/home/test.py
