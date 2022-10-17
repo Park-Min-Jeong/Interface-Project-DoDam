@@ -1,6 +1,6 @@
 {% extends "layouts/base-fullscreen.html" %}
 
-{% block title %} Sign IN {% endblock %} 
+{% block title %} 로그인 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -18,61 +18,58 @@
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">
-                                    <a href="https://appseed.us/product/pixel-bootstrap/django/" target="_blank">Django Pixel UI</a> - Login
-                                </h1>
-                                <br />
+                                <h1 class="mb-0 h3">로그인</h1>
                                 <span class="font-weight-normal">
                                     {% if msg %}
                                         {{ msg | safe }}
-                                    {% else %}
-                                        Add your credentials
-                                    {% endif %}                                  
+                                    {% endif %}
                                 </span>
                             </div>
+
                             <form method="post" action="" class="mt-4">
 
                                 {% csrf_token %}
-
-                                <!-- Form -->
-                                <div class="form-group mb-4">
-                                    <label for="email">Username</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1"><span class="fas fa-user"></span></span>
-                                        {{ form.username }}
-                                    </div>  
-                                </div>
-                                <!-- End of Form -->
                                 <div class="form-group">
+                                    <div class="form-group mb-4">
+                                        <label for="username">아이디/닉네임</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1"><span class="fas fa-user"></span></span>
+                                            {{ form.username }}
+                                        </div>
+                                    </div>
                                     <!-- Form -->
                                     <div class="form-group mb-4">
-                                        <label for="password">Password</label>
+                                        <label for="password">비밀번호</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon2"><span class="fas fa-unlock-alt"></span></span>
                                             {{ form.password }}
-                                        </div>  
+                                        </div>
                                     </div>
                                     <!-- End of Form -->
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div class="form-check mb-0">
                                             <input class="form-check-input" type="checkbox" value="" id="remember">
                                             <label class="form-check-label mb-0" for="remember">
-                                              Remember me
+                                                아이디 저장
                                             </label>
                                         </div>
-                                        <div><a href="{% url 'register' %}" class="text-right">Register</a></div>
+                                        <div><a href="#" class="small text-right">비밀번호 찾기</a></div>
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" name="login" class="btn btn-primary">Sign in</button>
+                                    <button type="submit" name="login" class="btn btn-primary">로그인하기</button>
                                 </div>
                             </form>
-
-                            <br />
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <span class="fw-normal">
+                                    아직 회원이 아니신가요?
+                                    <a href="{% url 'register' %}" class="fw-bold text-underline">회원가입하기</a>
+                                </span>
+                            </div>
 
                             <div class="d-flex justify-content-center align-items-center mt-4">
                                 <span class="fw-normal">
-                                    &copy; Themesberg - coded by 
+                                    &copy; Themesberg - coded by
                                     <a href="https://appseed.us" target="_blank"
                                        class="fw-bold text-underline">AppSeed</a>
                                 </span>
