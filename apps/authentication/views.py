@@ -24,9 +24,9 @@ def login_view(request):
                 login(request, user)
                 return redirect("/")
             else:
-                msg = 'Invalid credentials'
+                msg = "이메일 혹은 비밀번호를 잘못 입력하셨습니다"
         else:
-            msg = 'Error validating the form'
+            msg = "입력 형식을 확인하세요"
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
@@ -40,16 +40,15 @@ def register_user(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
+            raw_password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = "회원가입이 완료되었습니다"
             success = True
-
             # return redirect("/login/")
 
         else:
-            msg = 'Form is not valid'
+            msg = "입력 형식을 확인하세요"
     else:
         form = SignUpForm()
 
