@@ -51,7 +51,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">문화재 검색</h5>
                                 <p class="card-text">문화재 검색 서비스 설명</p>
-                                <a href="#" class="btn btn-primary">문화재 검색 페이지로 이동</a>
+                                <button id="searchButton" class="float-left submit-button">문화재 검색 페이지</button>
+                                <script type="text/javascript">
+                                    document.getElementById("searchButton").onclick = function() {
+                                        location.href = '/search' ;
+                                    };
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -61,7 +66,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">탐방 지도</h5>
                                 <p class="card-text">탐방지도 서비스 설명</p>
-                                <a href="#" class="btn btn-primary">탐방지도 페이지로 이동</a>
+                                <button id="routeButton" class="float-left submit-button">탐방지도 페이지</button>
+                                <script type="text/javascript">
+                                    document.getElementById("routeButton").onclick = function() {
+                                        location.href = '/routeBulletin' ;
+                                    };
+                                </script>
                             </div>
                         </div>
                     </div>
