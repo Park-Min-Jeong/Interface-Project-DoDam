@@ -90,10 +90,7 @@
 {% block javascripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    <!-- 타일 추가 시 textarea가 초기화되는 것을 막기 위해 AJAX로 구현 -->
     $(document).ready(function() {
-
-        <!-- 윈도우 오픈 시 첫 타일 추가 -->
         var order = 1;
         var tile = `<div class="card shadow" id="card${order}">`
                     + '<div class="card-header bg-white px-0 py-3">'
@@ -116,7 +113,6 @@
                 + '</div>'
         $(tile).appendTo("#tiles");
 
-        <!-- 버튼 클릭 시 타일 추가 -->
          $("#addTileButton").on("click", function() {
             order += 1
             var tile = `<div class="card shadow" id="card${order}">`
@@ -147,6 +143,5 @@
         var popup = window.open("{% url 'routeWriteSearch'%}"+"?order="+num, "route-search",
                                 "width=700px, height=800px, resizable=no, scrollbars=yes");
     };
-
 </script>
 {% endblock javascripts %}

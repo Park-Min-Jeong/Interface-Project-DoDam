@@ -72,27 +72,5 @@
         function openRouteWrite() {
             location.href = "{% url 'routeWrite' %}";
         };
-
-        window.addEventListener("load", function() {
-            var rows = document.getElementsByClassName("DetailTableContent");
-            for (var row in rows.item) {
-                var num = row.id;
-                var card_data = post_detail[num]
-                row.addEventListener("click", function() {
-                    document.getElementById("card-image")[0].src
-                        = card_data.ccbaCpno.imageUrl;
-                    document.getElementById("card-title").textContent
-                        = card_data.ccbaCpno.ccbaMnm1;
-                    document.getElementById("card-content").textContent
-                        = card_data.ccbaCpno.ccbaCtcdNm + "|" + card_data.ccbaCpno.ccbaPcd1Nm
-                            + card_data.ccbaCpno.ccmaName + card_data.ccbaCpno.crltsnoNm + "호";
-                    document.getElementById("card-comment").textContent
-                        = card_data.comment;
-                });
-            }
-        });
-
-
-
     </script>
 {% endblock javascripts %}

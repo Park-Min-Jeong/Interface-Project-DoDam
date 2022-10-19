@@ -3,7 +3,18 @@
 {% block title %} 탐방 경로 게시판 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <style>
+        .card {
+            width:100%;
+            aspect-ratio:1/2;
+        }
+        #card-image {
+            width:100%;
+            aspect-ratio:1/1;
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -44,38 +55,21 @@
                                     <th>코멘트</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for data in post_detail %}
-                                    <tr>
-                                        <td>{{ data.ccbaCpno.ccbaMnm1 }}</td>
-                                        <td>{{ data.ccbaCpno.ccbaCtcdNm }}</td>
-                                        <td>{{ data.ccbaCpno.ccbaPcd1Nm }}</td>
-                                        <td>{{ data.ccbaCpno.longitude }}</td>
-                                        <td>{{ data.ccbaCpno.latitude }}</td>
-                                        <td>{{ data.ccbaCpno.ccmaName }} {{ data.ccbaCpno.crltsnoNm }}호</td>
-                                        <td>{{ data.comment }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
+                            <tbody id="tableContents"></tbody>
                         </table>
                     </div>
                     <div class="col-3">
                         <div class="card shadow">
                             <img class="card-image-top rounded-top" id="card-image" src="{{ ASSETS_ROOT }}/img/transparent.png">
-                        </div>
-                        <div class="card-body">
-                        <h6 class="card-title" id="card-title"></h6>
-                            <p class="card-text" id="card-content" style="color:dimgray"></p>
-                            <p class="card-text" id="card-comment"></p>
+                            <div class="card-body">
+                            <h6 class="card-title" id="card-title"></h6>
+                                <p class="card-text" id="card-content" style="color:dimgray"></p>
+                                <p class="card-text" id="card-comment"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
         </section>
 
 
@@ -85,6 +79,27 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function() {
+            var post_detail = {{ post_detail|safe }};
+            $.each(post_detail, function(index, item) {
+                var tableContent = `<tr id="row${item.order}">`
+                                        + `<td>${item.ccbaMnm1}</td>`
+                                        + `<td>${item.ccbaCtcdNm}</td>`
+                                        + `<td>${item.ccbaPcd1Nm}</td>`
+                                        + `<td>${item.longitude}</td>`
+                                        + `<td>${item.latitude}</td>`
+                                        + `<td>${item.ccmaName} ${item.crltsnoNm}호</td>`
+                                        + `<td>${item.comment}</td>`
+                                    + `</tr>`;
+                $(tableContent).appendTo("#tableContents").on("click", function() {
+                    $("#card-image").attr("src", item.imageUrl);
+                    $("#card-title").text(item.ccbaMnm1);
+                    $("#card-content").html(item.ccbaCtcdNm + "|" + item.ccbaPcd1Nm + "<br>" + item.ccmaName + item.crltsnoNm + "호");
+                    $("#card-comment").text(item.comment);
+                });
+            });
+        });
     </script>
 {% endblock javascripts %}

@@ -2,7 +2,7 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 from .paging import make_pagenator
@@ -78,12 +78,49 @@ def route_bulletin(request):
     return render(request, "home/route-bulletin.html", context)
 
 
-def route_view(request, pindex):
-    post = route.objects.get(id=pindex)
-    post_detail = post.routedetail_set.all()
-    context = {"post": post, "post_detail": post_detail}
+def route_view(request, id):
+    post = route.objects.get(id=id)
+    post_detail = list()
 
+    for detail in post.routedetail_set.all():
+        detail_h = detail.ccbaCpno
+        detail_dict = {
+            "order":detail.order,
+            "comment":detail.comment,
+            "ccbaPcd1Nm":detail_h.ccbaPcd1Nm,
+            "ccbaCtcdNm":detail_h.ccbaCtcdNm,
+            "ccmaName":detail_h.ccmaName,
+            "crltsnoNm":detail_h.crltsnoNm,
+            "ccbaMnm1":detail_h.ccbaMnm1,
+            "imageUrl":detail_h.imageUrl,
+            "longitude":detail_h.longitude,
+            "latitude":detail_h.latitude
+        }
+        post_detail.append(detail_dict)
+
+    context = {"post": post, "post_detail": post_detail}
     return render(request, "home/route-view.html", context)
+
+
+# def route_view(request, pindex):
+#     print(pindex)
+#     post = route.objects.get(id=pindex)
+#
+#     if request.method=="POST":
+#         order = request.GET["order"]
+#         detail = post.routedetail_set.get(order=order)
+#         detail_dict = {
+#             "comment":detail.comment,
+#             "ccbaMnm1":detail.ccbaCpno.ccbaMnm1, "imageUrl":detail.ccbaCpno.imageUrl, "ccbaPcd1Nm":detail.ccbaCpno.ccbaPcd1Nm,
+#             "ccbaCtcdNm":detail.ccbaCpno.ccbaCtcdNm, "longitude":detail.ccbaCpno.longitude, "latitude":detail.ccbaCpno.latitude,
+#             "ccmaName":detail.ccbaCpno.ccmaName, "ccbacrltsnoNm":detail.ccbaCpno.crltsnoNm
+#         }
+#         return JsonResponse(detail_dict, json_dumps_params={"ensure_ascii":False})
+#
+#     else:
+#         post_detail = post.routedetail_set.all()
+#         context = {"post": post, "post_detail": post_detail, "pindex":pindex}
+#         return render(request, "home/route-view.html", context)
 
 
 def route_write(request):
