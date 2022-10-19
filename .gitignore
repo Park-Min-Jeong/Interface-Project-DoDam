@@ -6,7 +6,7 @@ __pycache__/
 *.pytest_cache
 .coverage
 
-# database & logs
+# database & logs #이거 때문에 sqlite3이 깃이 안됨
 *.db
 *.sqlite3
 *.log

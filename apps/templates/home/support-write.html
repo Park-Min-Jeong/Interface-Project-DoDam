@@ -24,12 +24,25 @@
         </section>
 
         <section class="section section-lg">
-            <form>
-                <input type="text" placeholder="Title">
-                <textarea placeholder="Question" rows="10"></textarea>
-                <input type="submit">
-                <input type="reset">
+
+        {% if msg %}
+            <script>
+                alert("{{msg}}");    //알림창으로 메세지 생성
+                location.href="{% url 'supportBulletin' %}"; //supportBulletin 화면으로 돌아감 //forthapp의 c.html에 write_cancel() 참고함
+            </script>
+        {% else %}
+            <form method="post" action="{% url 'supportWrite' %}" style="margin-left:20%; margin-right:20%">
+                {% csrf_token %} <!--POST방식이면 필요함-->
+                <input type="text" name="title"  placeholder="제목" style = "width:100%"><br> <!--size 속성을 지우고 style="width:100%"로 지정함-->
+                <textarea style="margin-top:5px; width:100%" name="content"  rows="10" placeholder="내용"></textarea> <!--cols 속성을 지우고 style="width:100%"로 지정했음--> <!--https://sir.kr/qa/103896 참고했음.-->
+                <br>
+                <div align="right">
+                    <a href = "{% url 'supportBulletin' %}"><button type="button">취소</button></a>
+                    <button type="submit">제출</button>
+                </div>
             </form>
+        {% endif %}
+
         </section>
 
     </main>
@@ -37,4 +50,5 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+{% endblock javascripts %}

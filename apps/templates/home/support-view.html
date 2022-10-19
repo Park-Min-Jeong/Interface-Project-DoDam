@@ -3,7 +3,32 @@
 {% block title %} 문의 게시판 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<style>
+    .left{
+        margin-left: 20%;
+    }
+    .right{
+        margin-right: 10%;
+    }
+    .left-box{
+        display: inline-block;
+        float: left;
+        padding:5px;
+        font-size:20px
+    }
+    .right-box{
+        display: inline-block;
+        float: right;
+        padding:5px;
+        font-size:20px
+    }
+    hr{
+        margin-left: 20%;
+        width:70%;
+    }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -16,15 +41,53 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
-                        <h1 class="display-2 mb-3">문화재 검색</h1>
-                        <p class="lead">시대별로 문화재를 검색할 수 있습니다.</p>
+                        <h1 class="display-2 mb-3">문의 게시판</h1>
+                        <p class="lead">문의사항 확인</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section section-lg">
-            <h2>작성 필요</h2>
+        <section class="section section-lg" styel="border: 1px solid red">
+            <div>
+                <p class="left-box left" >
+                    <span sytle="text-align:left">제목: {{post.title}}</span>
+                </p>
+                <p class="right-box right">
+                    <span sytle="text-align:right">{{post.writeDT}}</span>
+                </p>
+            </div>
+
+            <br>
+            <div style="clear:both">
+                <hr> <!--hr태그의 css는 위에서 적용해줬음-->
+                <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre">{{post.question}}</p>
+                <!-- textarea 태그로 입력받은 내용을 html에서 \n을 <br>로 처리해서 출력하는 방법:
+                https://tae-hui.tistory.com/m/entry/HTML-%EC%9E%85%EB%A0%A5%EB%B0%9B%EC%9D%80-%EA%B8%80-%EA%B3%B5%EB%B0%B1%EA%B3%BC-%EC%A4%84%EB%B0%94%EA%BF%88-%EA%B0%80%EB%A1%9C%EA%B8%B8%EC%9D%B4textarea-pre-pre-wrap
+                에서 4번째 방법-->
+                {% if post.answer == None %}
+                    <div style="height:50px"><button type="button" class="btn btn-success right" style="float:right" onclick="displayAnswerForm() ">답글 달기</button></div> <!--이 div와 아래 div태그 내용은 visitorapp의 visitor_crud.html에서 36~58번째 라인 참고함-->
+                {% else %}
+                    <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre">{{post.answer}}</p>
+                {% endif %}
+
+            </div>
+            <div>
+                <div name="answerForm" style="display:none">
+                    <h2 style="text-align:center; margin-left:10%">답변을 작성해주세요</h2>
+                    <hr>
+                    <form method="post" action="{% url 'supportView' post.id %}" class="left right"> <!--url 형식은 forthapp의 r.html에 45번째 코드 참고-->
+                        {% csrf_token %}
+                        <textarea style="margin-top:10px; width:100%" name="answerQ" rows="10"></textarea> <!--cols 속성 대신 style에서 width:100%로 함. support-write.html 43번째 라인에서 최초 시도.-->
+                        <button type="submit">작성 완료</button>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+
         </section>
 
 
@@ -34,4 +97,12 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script>
+    function displayAnswerForm(){ //visitorapp의 visitor_crud.html 51번째 라인 참고
+        //document.getElementsByName("answerForm").style.display = 'block'; //getElementById면 이렇게 함
+        var d = document.getElementsByName("answerForm")[0]; //강사님께 물어서 이렇게 함.
+        d.style.display = 'block';
+    }
+</script>
+{% endblock javascripts %}

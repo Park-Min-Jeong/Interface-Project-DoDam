@@ -20,7 +20,7 @@ urlpatterns = [
     path("routeView/<int:pindex>/", views.route_view, name="routeView"),
     path("search/", views.search, name="search"),
     path("supportWrite/", views.support_write, name="supportWrite"),
-    path("supportView/", views.support_view, name="supportView"),
+    path("supportView/<int:id>", views.support_view, name="supportView"), #localhost:8000/ 뒤에 supportView/숫자 가 붙는다. #forthapp\urls.py 참고
     path("routeWrite/", views.route_write, name="routeWrite"),
     path("routeWriteSearch/", views.route_write_search, name="routeWriteSearch"),
 ]
