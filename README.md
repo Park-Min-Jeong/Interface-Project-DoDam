@@ -79,7 +79,7 @@ Visit `http://localhost:5085` in your browser. The app should be up & running.
 ```bash
 $ # Get the code
 $ git clone https://github.com/app-generator/django-pixel.git
-$ cd django-pixel
+$ cd Interface-Project-DoDam
 ```
 
 <br />
