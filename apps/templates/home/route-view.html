@@ -24,7 +24,58 @@
         </section>
 
         <section class="section section-lg">
-            <h2>작성 필요</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1>{{ post.writer.username }}</h1>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>국문명</th>
+                                    <th>지역</th>
+                                    <th>시대</th>
+                                    <th>위도</th>
+                                    <th>경도</th>
+                                    <th>분류</th>
+                                    <th>코멘트</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in post_detail %}
+                                    <tr>
+                                        <td>{{ data.ccbaCpno.ccbaMnm1 }}</td>
+                                        <td>{{ data.ccbaCpno.ccbaCtcdNm }}</td>
+                                        <td>{{ data.ccbaCpno.ccbaPcd1Nm }}</td>
+                                        <td>{{ data.ccbaCpno.longitude }}</td>
+                                        <td>{{ data.ccbaCpno.latitude }}</td>
+                                        <td>{{ data.ccbaCpno.ccmaName }} {{ data.ccbaCpno.crltsnoNm }}호</td>
+                                        <td>{{ data.comment }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3">
+                        <div class="card shadow">
+                            <img class="card-image-top rounded-top" id="card-image" src="{{ ASSETS_ROOT }}/img/transparent.png">
+                        </div>
+                        <div class="card-body">
+                        <h6 class="card-title" id="card-title"></h6>
+                            <p class="card-text" id="card-content" style="color:dimgray"></p>
+                            <p class="card-text" id="card-comment"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
         </section>
 
 

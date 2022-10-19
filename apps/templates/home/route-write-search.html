@@ -1,0 +1,119 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} 탐방 검색 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        <section class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark" data-background="{{ ASSETS_ROOT }}/img/pages/form-image.jpg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
+                        <form method="GET" action="#">
+                            <div class="input-group text-center text-md-center my-4">
+                                <input type="text" class="form-control" name="keyword" placeholder="검색어 입력" aria-label="SearchRoute" aria-describedby="basic-addon1">
+                                <span class="input-group-text" id="basic-addon1" onclick=><span class="fas fa-search"></span></span>
+                            </div>
+                            <input name="order" type="hidden" value="{{ order }}">
+                        </form>
+                        <div class="row mb-4">
+                            {% if keyword %}
+                                <div class="col text-start">검색어: {{ keyword }}</div>
+                            {% else %}
+                                <div class="col text-start">검색어:</div>
+                            {% endif %}
+                            <div class="col text-end">총 {{ resultlen }}건</div>
+                        </div>
+
+                        <!-- 검색 결과 타일 -->
+                        {% for data in page_obj %}
+                            <div class="card shadow my-2" style="height:130px;" id="card{{ data.ccbaCpno }}">
+                                <div class="row g-0 align-item-start">
+                                    <div class="col-3">
+                                        <img src="{{ data.imageUrl }}" class="img rounded-start" style="height:130px; width:130px;">
+                                    </div>
+                                    <div class="col-7 p-3">
+                                        <h6 class="card-title">{{ data.ccbaMnm1 }}</h6>
+                                        <p class="card-text">{{ data.ccbaPcd1Nm }} | {{ data.ccbaCtcdNm }}<br>{{ data.ccmaName }} {{ data.crltsnoNm }}호</p>
+                                    </div>
+                                    <div class="col-2 align-self-center">
+                                        <button class="btn btn-outline-primary d-lg-inline me-md-3" onclick="closeAndReturn({{ data.ccbaCpno }}, {{ order }})"><span class="fas fa-check"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <!-- paginator -->
+                        <nav aria-label="Blog page navigation">
+                            <ul class="pagination justify-content-center my-4">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="first link" href="?order={{ order }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}&page=1">
+                                            <span class="fas fa-angle-double-left"></span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" aria-label="first link" href="#">
+                                            <span class="fas fa-angle-double-left"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for index in page_list %}
+                                    {% if index == page_obj.number %}
+                                        <li class="page-item active">
+                                            <a class="page-link" href="?order={{ order }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}&page={{ index }}">{{ index }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?order={{ order }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}&page={{ index }}">{{ index }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="end link" href="?order={{ order }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}&page={{ page_obj.paginator.num_pages }}">
+                                            <span class="fas fa-angle-double-right"></span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" aria-label="end link" href="#">
+                                            <span class="fas fa-angle-double-right"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function closeAndReturn(ccbaCpno, order) {
+        var writeCard = opener.document.getElementById("card"+order);
+        var searchCard = document.getElementById("card"+ccbaCpno);
+
+        writeCard.getElementsByClassName("inputCpno")[0].value
+            = ccbaCpno;
+        writeCard.getElementsByClassName("card-image")[0].src
+            = searchCard.getElementsByClassName("img")[0].src
+        writeCard.getElementsByClassName("card-title")[0].textContent
+             = searchCard.getElementsByClassName("card-title")[0].textContent
+
+        window.close();
+    };
+</script>
+{% endblock javascripts %}

@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
-from .models import heritage
+
 
 def index(request):
     context = {'segment': 'index'}
@@ -45,22 +45,6 @@ def route_view(request):
 def search(request):
     return render(request, "home/search.html")
 
-#def search(request):
-#    context = dict()
-#    free_post = Post.objects.filter(category__icontains="문화재 검색").order_by('-id')
-#    post = request.Post.get('post',"")
-#    if post :
-#       free_post = free_post.filter(title__icontains=post)
-#       context['free_post']=free_post
-#       context['post'] = post
-#       return render(request,'home/search.html',context)
-#   else :
-#       return render(request,'home/search.html')
-
-#def index(request):
-    ccbaCpno = heritage.objects.all()
-#def read(request, ccbaPcd1):
-    post = heritage.objects.all()
 
 # def pages(request):
 #     context = {}

@@ -3,7 +3,46 @@
 {% block title %} 탐방 경로 작성 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<style>
+    #tiles {
+        text-align:center;
+        overflow-x:scroll;
+        white-space:nowrap;
+    }
+    .card {
+        width:280px;
+        height:300px;
+        flex-shrink:0;
+        margin:20px;
+        padding:10px;
+    }
+    .card-image {
+        width:100px;
+        height:100px;
+        border-style:none;
+        border-radius:15px;
+    }
+    .card-title {
+        display:block;
+        width:130px;
+        white-space:normal;
+        text-align:left;
+        margin-left:10px;
+        margin-right:10px;
+    }
+    .container {
+        text-align:center;
+        margin:auto;
+    }
+    .comments {
+        border-style:none;
+        border-color:Transparent;
+        overflow:auto;
+        width:250px;
+    }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -17,28 +56,97 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
                         <h1 class="display-2 mb-3">탐방 루트 작성</h1>
-                        <p class="lead">문의 사항 작성</p>
+                        <p class="lead">탐방한 루트를 공유합시다~~~</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="section section-lg">
-            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <button class="btn btn-primary" type="button">검색</button>
-                        <form>
-                            <textarea placeholder="comments" rows="3"></textarea>
-                        </form>
+            <div class="container">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="d-flex justfy-content-start" id="tiles">
+                                <!-- 여기에 타일 생성됨 -->
+                            </div>
+                        </div>
+                        <div class="col-2 align-self-center">
+                            <button class="btn btn-primary" id="addTileButton" type="button"><span class="fas fa-plus"></span></button>
+                        </div>
+                        <div class="col">
+                            <input type="submit" value="완료">
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
-
     </main>
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    <!-- 타일 추가 시 textarea가 초기화되는 것을 막기 위해 AJAX로 구현 -->
+    $(document).ready(function() {
+
+        <!-- 윈도우 오픈 시 첫 타일 추가 -->
+        var order = 1;
+        var tile = `<div class="card shadow" id="card${order}">`
+                    + '<div class="card-header bg-white px-0 py-3">'
+                        +'<div class="row g-0">'
+                            + '<div class="col-5">'
+                                + '<img class="card-image" src="{{ ASSETS_ROOT }}/img/transparent.png">'
+                            + '</div>'
+                            + '<div class="col-7">'
+                                + '<div class="d-flex flex-column justify-content-between" style="height:100px;">'
+                                    + '<h6 class="card-title"></h6>'
+                                    + `<button class="btn btn-sm btn-primary align-self-end" type="button" id="button${order}" onclick="openSearch(${order})"><span class="fas fa-search"></span></button>`
+                                +'</div>'
+                            + '</div>'
+                        + '</div>'
+                    + '</div>'
+                    + '<div class="card-body px-0 py-4">'
+                        + '<input class="inputCpno" type="hidden" name="ccbaCpno" value="">'
+                        + `<textarea rows="4" placeholder="comments" name="comments" class="comments" id="comments${order}"></textarea>`
+                    + '</div>'
+                + '</div>'
+        $(tile).appendTo("#tiles");
+
+        <!-- 버튼 클릭 시 타일 추가 -->
+         $("#addTileButton").on("click", function() {
+            order += 1
+            var tile = `<div class="card shadow" id="card${order}">`
+                    + '<div class="card-header bg-white px-0 py-3">'
+                        +'<div class="row g-0">'
+                            + '<div class="col-5">'
+                                + '<img class="card-image" src="{{ ASSETS_ROOT }}/img/transparent.png">'
+                            + '</div>'
+                            + '<div class="col-7">'
+                                + '<div class="d-flex flex-column justify-content-between" style="height:100px;">'
+                                    + '<h6 class="card-title"></h6>'
+                                    + `<button class="btn btn-sm btn-primary align-self-end" type="button" id="button${order}" onclick="openSearch(${order})"><span class="fas fa-search"></span></button>`
+                                +'</div>'
+                            + '</div>'
+                        + '</div>'
+                    + '</div>'
+                    + '<div class="card-body px-0 py-4">'
+                        + '<input class="inputCpno" type="hidden" name="ccbaCpno">'
+                        + `<textarea rows="4" placeholder="comments" name="comments" class="comments" id="comments${order}"></textarea>`
+                    + '</div>'
+                + '</div>'
+            $(tile).appendTo("#tiles");
+        });
+    });
+
+    function openSearch(num) {
+        window.name = "route-write";
+        var popup = window.open("{% url 'routeWriteSearch'%}"+"?order="+num, "route-search",
+                                "width=700px, height=800px, resizable=no, scrollbars=yes");
+    };
+
+</script>
+{% endblock javascripts %}
