@@ -44,7 +44,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for data in bulletin.data_list %}
+                        {% for data in data_list %}
                             <tr onclick="location.href='{% url 'routeView' data.0.id %}'">
                                 <td>{{ data.0.id}}</td>
                                 <td>{{ data.0.writer.username }}</td>
@@ -58,49 +58,7 @@
                 <button class="btn btn-primary" id="writeRouteButton" type="button" onclick="openRouteWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
 
                 <!-- paginator -->
-                <nav aria-label="Blog page navigation">
-                    <ul class="pagination justify-content-center my-4">
-                        {% if page_obj.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" aria-label="first link" href="?page=1">
-                                    <span class="fas fa-angle-double-left"></span>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" aria-label="first link" href="#">
-                                    <span class="fas fa-angle-double-left"></span>
-                                </a>
-                            </li>
-                        {% endif %}
-
-                        {% for index in page_list %}
-                            {% if index == page_obj.number %}
-                                <li class="page-item active">
-                                    <a class="page-link" href="?page={{ index }}">{{ index }}</a>
-                                </li>
-                            {% else %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ index }}">{{ index }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-
-                        {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" aria-label="end link" href="?page={{ page_obj.paginator.num_pages }}">
-                                    <span class="fas fa-angle-double-right"></span>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" aria-label="end link" href="#">
-                                    <span class="fas fa-angle-double-right"></span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
+                {% include "includes/paginator.html" %}
             </div>
         </section>
     </main>

@@ -2,25 +2,13 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-
-from django import template
-#from django.contrib.auth.decorators import login_required
-#from django.http import HttpResponse, HttpResponseRedirect
-# from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
-from django.urls import reverse
 from django.shortcuts import render
-from django.core.paginator import Paginator
+from .paging import make_pagenator
 from .models import *
-
-from django.contrib.auth.models import User #support_write()의 User 객체 사용을 위한 구문
-from .models import support                 #support_write()의 sup = support(id=id, writer = writer, question=content, answer=None, answered=0)를 위한 구문. support는 models.py에 있는 모델 클래스 이름
-from django.core.paginator import Paginator #support_bulletin()의 Paginator를 위한 구문
-
-#10/17 추가
-from django.contrib.auth import get_user_model #support_write()에서 로그인한 User 정보를 가져오기 위함.
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, get_user_model
 
 def index(request):
     context = {'segment': 'index'}
@@ -29,16 +17,10 @@ def index(request):
     return HttpResponse(html_template.render(context, request))
 
 
-def support_bulletin(request):  #visitorapp\views.py의 v_read()를 참고.(13~23번째 라인)
-    page = request.GET.get('page', 1)
-    vlist = support.objects.all()
-    paginator = Paginator(vlist.order_by('-id'), 5) #페이징실습.pdf 1pg 마지막 참고함. #게시글 2개마다 페이징 #-id로 줘서 id값 내림차순으로 정렬함.
-    #print(paginator)
-    vlistpage = paginator.get_page(page)
-    #print(type(vlistpage))
-    #for d in vlistpage :
-    #    print(type(d), d)
-    context = {"vlist": vlistpage}  #페이지 정보를 넘겨줌
+def support_bulletin(request):
+    obj_list = support.objects.all().order_by("-id")
+    page_obj, page_list = make_pagenator(page=request.GET.get("page", 1), num=5, obj_list=obj_list)
+    context = {"page_obj":page_obj, "page_list": page_list}
     return render(request, "home/support-bulletin.html", context)
 
 #@login_required #로그인 했을때만 동작하도록 하는 키워드인데 비로그인시 그냥 404 에러를 리턴해버림
@@ -78,15 +60,10 @@ def support_view(request, id): #forthapp\views.py의 u()와 r() 참고
 
 
 def route_bulletin(request):
-    num = 3
-    page = request.GET.get("page", 1)
     obj_list = route.objects.all().order_by("-id")
+    page_obj, page_list = make_pagenator(page=request.GET.get("page", 1), num=3, obj_list=obj_list)
 
-    paginator = Paginator(obj_list, num)
-    page_obj = paginator.get_page(page)
-    page_list = paginator.get_elided_page_range(number=page, on_each_side=2, on_ends=1)
     data_list = list()
-
     for data in page_obj:
         Pcd1_list, Ctcd_list = list(), list()
         for detail_data in data.routedetail_set.all():
@@ -96,9 +73,7 @@ def route_bulletin(request):
         Ctcd = ", ".join(set(Ctcd_list))
         data_list.append([data, Pcd1, Ctcd])
 
-    context = {"bulletin":
-                   {"page_obj": page_obj, "data_list": data_list, "page_list": page_list}
-               }
+    context = {"data_list": data_list, "page_list": page_list}
 
     return render(request, "home/route-bulletin.html", context)
 
@@ -130,20 +105,18 @@ def route_write(request):
 
 
 def route_write_search(request):
-    page = request.GET.get("page", 1)
     keyword = request.GET.get("keyword", None)
     order = request.GET.get("order", 1)
+
     if keyword:
         obj_list = heritage.objects.filter(ccbaMnm1__contains=keyword).order_by("ccbaCpno")
     else:
         obj_list = heritage.objects.all().order_by("ccbaCpno")
 
-    paginator = Paginator(obj_list, 5)
-    page_obj = paginator.get_page(page)
-    page_list = paginator.get_elided_page_range(number=page, on_each_side=2, on_ends=1)
+    page_obj, page_list = make_pagenator(page=request.GET.get("page", 1), num=5, obj_list=obj_list)
+
     context = {"page_obj": page_obj, "page_list": page_list,
-               "keyword": keyword, "resultlen": len(obj_list),
-               "order":order}
+               "keyword": keyword, "resultlen": len(obj_list), "order":order}
 
     return render(request, "home/route-write-search.html", context)
 
