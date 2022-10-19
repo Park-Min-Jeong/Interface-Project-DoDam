@@ -19,19 +19,27 @@
                         <div class="bootstrap-big-icon d-none d-lg-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="700" height="622" class="d-block my-1"
                                 viewBox="0 0 118 94" role="img">
-                                <title>역사 도담</title>
+                                <title>Bootstrap</title>
                                 <path fill-rule="evenodd" clip-rule="evenodd"
-                                     d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+                                    d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
                                     fill="currentColor"></path>
                             </svg>
                         </div>
-                        <h1 class="fw-bolder display-2" >
+                        <h1 class="fw-bolder display-2">
                             역사 도담
                         </h1>
-                        <h2 class="lead fw-normal text-muted mb-4 px-lg-10 text-border">
+                        <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
                             시대별 문화재 지도
-                            <p>대한민국의 아름다운 문화재로 도담한 역사여행 다녀오세요!</p>
                         </h2>
+                        <div class="d-flex justify-content-center flex-column mb-6 mb-lg-5">
+                            <a href="https://themesberg.com" class="d-block text-center mx-auto" target="_blank">
+                                <img src="{{ ASSETS_ROOT }}/img/themesberg.svg" class="d-block mx-auto mb-3" height="25"
+                                    width="25" alt="Themesberg Logo">
+                                <span class="text-muted font-small">
+                                    &copy; Themesberg - coded by AppSeed.
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,43 +51,51 @@
         </section>
 
         <section class="section section-lg">
-            <div class="container" >
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <img src="images/card-image.png" alt="" />
-                            <div class="card-body">
-                                <h5 class="card-title">문화재 검색</h5>
-                                <p class="card-text">문화재 검색 서비스 설명</p>
-                                <button id="searchButton" class="float-left submit-button">문화재 검색 페이지</button>
-                                <script type="text/javascript">
-                                    document.getElementById("searchButton").onclick = function() {
-                                        location.href = '/search' ;
-                                    };
-                                </script>
-                            </div>
-                        </div>
+            <div class="container">
+                <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+                    <div class="col-12 col-lg-5 mb-5 mb-lg-0 order-lg-2">
+                        <h2 class="h1">설명 제목</h2>
+                        <p class="mb-4 lead fw-bold">키워드</p>
+                        <p class="mb-4">내용</p>
+                        <a href="https://docs.appseed.us/products/django-apps/pixel-lite" target="_blank"
+                            class="btn btn-outline-primary"><span class="fas fa-book me-2"></span>버튼
+                        </a>
                     </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <img src="images/card-image.png" alt="" />
-                            <div class="card-body">
-                                <h5 class="card-title">탐방 지도</h5>
-                                <p class="card-text">탐방지도 서비스 설명</p>
-                                <button id="routeButton" class="float-left submit-button">탐방지도 페이지</button>
-                                <script type="text/javascript">
-                                    document.getElementById("routeButton").onclick = function() {
-                                        location.href = '/routeBulletin' ;
-                                    };
-                                </script>
-                            </div>
-                        </div>
+                    <div class="col-12 col-lg-6 order-lg-1">
+                        <img src="{{ ASSETS_ROOT }}/img/illustrations/bs5-illustrations.svg" alt="Front pages overview">
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <h2 class="h1 d-flex align-items-center">설명 제목</h2>
+                        <p class="mb-4 lead fw-bold">키워드</p>
+                        <p class="mb-4">내용</p>
+                        <a href="https://appseed.us/django/django-pixel-uikit-pro"
+                            target="_blank" class="btn btn-primary mt-2 animate-up-2">
+                            <span class="fas fa-th-large me-2"></span>버튼
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="{{ ASSETS_ROOT }}/img/sections-mockup.jpg" alt="MapBox Leaflet.js Custom Integration Mockup">
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-12 col-lg-5 order-lg-2 mb-5 mb-lg-0">
+                        <h2 class="h1 d-flex align-items-center">User Dashboard <span
+                                class="badge-md ms-3 mb-0 fs-6 badge rounded-pill text-white bg-tertiary">Pro</span>
+                        </h2>
+                        <p class="mb-4 lead fw-bold">9 dashboard pages</p>
+                        <p class="mb-4">Quickly set up a user settings panel with the advanced dashboard pages including
+                            billing, settings, messaging</p>
+                        <a href="https://jinja-pixel-pro.appseed-srv1.com/dashboard-account.html" target="_blank"
+                            class="btn btn-tertiary animate-up-2"><span class="fas fa-chart-line me-2"></span> Explore
+                            dashboard</a>
+                    </div>
+                    <div class="col-12 col-lg-6 order-lg-1">
+                        <img src="{{ ASSETS_ROOT }}/img/presentation-mockup-dashboard.png" alt="Dashboard Preview">
                     </div>
                 </div>
             </div>
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         </section>
 
 
