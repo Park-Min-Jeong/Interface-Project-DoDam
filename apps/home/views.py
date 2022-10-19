@@ -9,6 +9,7 @@ from .paging import make_pagenator
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     context = {'segment': 'index'}
@@ -102,43 +103,31 @@ def route_view(request, id):
     return render(request, "home/route-view.html", context)
 
 
-# def route_view(request, pindex):
-#     print(pindex)
-#     post = route.objects.get(id=pindex)
-#
-#     if request.method=="POST":
-#         order = request.GET["order"]
-#         detail = post.routedetail_set.get(order=order)
-#         detail_dict = {
-#             "comment":detail.comment,
-#             "ccbaMnm1":detail.ccbaCpno.ccbaMnm1, "imageUrl":detail.ccbaCpno.imageUrl, "ccbaPcd1Nm":detail.ccbaCpno.ccbaPcd1Nm,
-#             "ccbaCtcdNm":detail.ccbaCpno.ccbaCtcdNm, "longitude":detail.ccbaCpno.longitude, "latitude":detail.ccbaCpno.latitude,
-#             "ccmaName":detail.ccbaCpno.ccmaName, "ccbacrltsnoNm":detail.ccbaCpno.crltsnoNm
-#         }
-#         return JsonResponse(detail_dict, json_dumps_params={"ensure_ascii":False})
-#
-#     else:
-#         post_detail = post.routedetail_set.all()
-#         context = {"post": post, "post_detail": post_detail, "pindex":pindex}
-#         return render(request, "home/route-view.html", context)
-
-
+@login_required(login_url="/login/")  # 로그인하지 않았으면 로그인 페이지로 이동
 def route_write(request):
+    context = None
     if request.method == "POST":
-        print(request.POST)
+        success = False
         ccbaCpno = request.POST.getlist("ccbaCpno")
         comments = request.POST.getlist("comments")
+        user = User.objects.get(pk=request.user.id)
 
-        r_list = route(writer_id=1)
-        r_list.save()
+        if "" not in ccbaCpno:
+            r_list = route(writer=user)
+            r_list.save()
+            p_id = route.objects.last().id
+            for i in range(len(ccbaCpno)):
+                r_detail = routeDetail(order=i+1, comment=comments[i], ccbaCpno_id=ccbaCpno[i], post_id=p_id)
+                r_detail.save()
 
-        p_id = route.objects.last().id
+            message = request.user.username + "님의 게시글 업로드 완료!"
+            success = True
+        else:
+            message = "에러"
 
-        for i in range(len(ccbaCpno)):
-            r_detail = routeDetail(order=i+1, comment=comments[i], ccbaCpno_id=ccbaCpno[i], post_id=p_id)
-            r_detail.save()
+        context = {"message": message, "success": success}
 
-    return render(request, "home/route-write.html")
+    return render(request, "home/route-write.html", context)
 
 
 def route_write_search(request):

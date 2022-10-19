@@ -63,24 +63,38 @@
         </section>
 
         <section class="section section-lg">
-            <div class="container">
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-10">
-                            <div class="d-flex justfy-content-start" id="tiles">
-                                <!-- 여기에 타일 생성됨 -->
+            {% if message %}
+                {% if success %}
+                    <script>
+                        alert("{{ message }}");
+                        location.href="{% url 'routeBulletin' %}";
+                    </script>
+                {% else %}
+                    <script>
+                        alert("{{ message }}");
+                        location.href="{% url 'routeWrite' %}";
+                    </script>
+                {% endif %}
+            {% else %}
+                <div class="container">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="d-flex justfy-content-start" id="tiles">
+                                    <!-- 여기에 타일 생성됨 -->
+                                </div>
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <button class="btn btn-primary" id="addTileButton" type="button"><span class="fas fa-plus"></span></button>
+                            </div>
+                            <div class="col">
+                                <input type="submit" value="완료">
                             </div>
                         </div>
-                        <div class="col-2 align-self-center">
-                            <button class="btn btn-primary" id="addTileButton" type="button"><span class="fas fa-plus"></span></button>
-                        </div>
-                        <div class="col">
-                            <input type="submit" value="완료">
-                        </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+            {% endif %}
         </section>
     </main>
 
