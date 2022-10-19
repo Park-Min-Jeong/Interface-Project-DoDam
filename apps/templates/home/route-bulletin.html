@@ -3,14 +3,23 @@
 {% block title %} 탐방 경로 게시판 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <style>
+        .card {
+            height:300px;
+        }
+        .card-image-top {
+            height:100px;
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
 
     <main>
     
         {% include 'includes/preloader.html' %}
-    
+
         <!-- Header -->
         <section class="section section-header pb-11 bg-primary text-white">
             <div class="container">
@@ -24,14 +33,108 @@
         </section>
 
         <section class="section section-lg">
-            <h2>작성 필요</h2>
-            <button class="btn btn-primary" type="button">작성</button>
-        </section>
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>글 번호</th>
+                            <th>작성자</th>
+                            <th>지역</th>
+                            <th>시대</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in bulletin.data_list %}
+                            <tr onclick="location.href='{% url 'routeView' data.0.id %}'">
+                                <td>{{ data.0.id}}</td>
+                                <td>{{ data.0.writer.username }}</td>
+                                <td>{{ data.1 }}</td>
+                                <td>{{ data.2 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
-    
+                <button class="btn btn-primary" id="writeRouteButton" type="button" onclick="openRouteWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
+
+                <!-- paginator -->
+                <nav aria-label="Blog page navigation">
+                    <ul class="pagination justify-content-center my-4">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" aria-label="first link" href="?page=1">
+                                    <span class="fas fa-angle-double-left"></span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" aria-label="first link" href="#">
+                                    <span class="fas fa-angle-double-left"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% for index in page_list %}
+                            {% if index == page_obj.number %}
+                                <li class="page-item active">
+                                    <a class="page-link" href="?page={{ index }}">{{ index }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ index }}">{{ index }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" aria-label="end link" href="?page={{ page_obj.paginator.num_pages }}">
+                                    <span class="fas fa-angle-double-right"></span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" aria-label="end link" href="#">
+                                    <span class="fas fa-angle-double-right"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </section>
     </main>
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function openRouteWrite() {
+            location.href = "{% url 'routeWrite' %}";
+        };
+
+        window.addEventListener("load", function() {
+            var rows = document.getElementsByClassName("DetailTableContent");
+            for (var row in rows.item) {
+                var num = row.id;
+                var card_data = post_detail[num]
+                row.addEventListener("click", function() {
+                    document.getElementById("card-image")[0].src
+                        = card_data.ccbaCpno.imageUrl;
+                    document.getElementById("card-title").textContent
+                        = card_data.ccbaCpno.ccbaMnm1;
+                    document.getElementById("card-content").textContent
+                        = card_data.ccbaCpno.ccbaCtcdNm + "|" + card_data.ccbaCpno.ccbaPcd1Nm
+                            + card_data.ccbaCpno.ccmaName + card_data.ccbaCpno.crltsnoNm + "호";
+                    document.getElementById("card-comment").textContent
+                        = card_data.comment;
+                });
+            }
+        });
+
+
+
+    </script>
+{% endblock javascripts %}

@@ -22,8 +22,18 @@
                 </div>
             </div>
         </section>
-
+        <!--<form method="POST" action="{% url 'search' %"}>
+              {%csrf_token%}
+              <input type="search" placeholder="문화재를 입력하세요." aria-label="Search" name="post" value="{{post}}">
+              <button type="submit">Search</button>
+        </form>-->
         <!-- content -->
+        <!---<from method="post">
+            {% csrf_token %}
+            <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">석기</label>
+        </from>-->
+
         <section class="section section-lg">
             <div class="container mt-n10">
                 <div class="row">
@@ -37,16 +47,52 @@
                             <!-- Content -->
                             <div class="card-body">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label" for="defaultCheck1">First Option</label>
+                                    <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">석기</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                    <label class="form-check-label" for="defaultCheck2">Second Option</label>
+                                    <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2">
+                                    <label class="form-check-label" for="defaultCheck2">청동기</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                                    <label class="form-check-label" for="defaultCheck3">Third Option</label>
+                                    <input class="form-check-input" type="checkbox" value="3" id="defaultCheck3">
+                                    <label class="form-check-label" for="defaultCheck3">철기</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="4" id="defaultCheck4">
+                                    <label class="form-check-label" for="defaultCheck4">고구려</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="5" id="defaultCheck5">
+                                    <label class="form-check-label" for="defaultCheck5">백제</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="6" id="defaultCheck6">
+                                    <label class="form-check-label" for="defaultCheck6">신라</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="7" id="defaultCheck7">
+                                    <label class="form-check-label" for="defaultCheck7">가야</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="8" id="defaultCheck8">
+                                    <label class="form-check-label" for="defaultCheck8">통일신라</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="9" id="defaultCheck9">
+                                    <label class="form-check-label" for="defaultCheck9">고려</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="10" id="defaultCheck10">
+                                    <label class="form-check-label" for="defaultCheck10">조선</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="11" id="defaultCheck11">
+                                    <label class="form-check-label" for="defaultCheck11">대한제국</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="12" id="defaultCheck12">
+                                    <label class="form-check-label" for="defaultCheck12">일제강점기</label>
                                 </div>
                             </div>
                         </div>
