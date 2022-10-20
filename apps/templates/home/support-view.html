@@ -61,14 +61,17 @@
             <br>
             <div style="clear:both">
                 <hr> <!--hr태그의 css는 위에서 적용해줬음-->
-                <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre">{{post.question}}</p>
+                <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre; font-size: 20px">{{post.question}}</p> <!--질문글 출력-->
                 <!-- textarea 태그로 입력받은 내용을 html에서 \n을 <br>로 처리해서 출력하는 방법:
                 https://tae-hui.tistory.com/m/entry/HTML-%EC%9E%85%EB%A0%A5%EB%B0%9B%EC%9D%80-%EA%B8%80-%EA%B3%B5%EB%B0%B1%EA%B3%BC-%EC%A4%84%EB%B0%94%EA%BF%88-%EA%B0%80%EB%A1%9C%EA%B8%B8%EC%9D%B4textarea-pre-pre-wrap
                 에서 4번째 방법-->
                 {% if post.answer == None %}
+                {% if request.user.is_superuser == 1%} <!--만약 이 두 if문을 and로 묶어버리면 답변글이 없어도 관리자 계정이 아니면(xor 연산이  true가 되면) else문이 실행됨. 즉 답변글 textarea에 None이라고 출력되어있다.-->
+                <!--관리자 계정 등록이 선행되어야 함. https://sorious77.tistory.com/63 -->
                     <div style="height:50px"><button type="button" class="btn btn-success right" style="float:right" onclick="displayAnswerForm() ">답글 달기</button></div> <!--이 div와 아래 div태그 내용은 visitorapp의 visitor_crud.html에서 36~58번째 라인 참고함-->
-                {% else %}
-                    <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre">{{post.answer}}</p>
+                {% endif %} <!--if request.user.is_superuser == 1 의 end블록-->
+                {% else %} <!--이 else문은 if post.answer == None의 else문. 즉 등록된 답변이 있으면-->
+                    <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre">{{post.answer}}</p> <!--답변글 출력-->
                 {% endif %}
 
             </div>
