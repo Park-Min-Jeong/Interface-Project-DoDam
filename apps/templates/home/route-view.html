@@ -35,23 +35,11 @@
 
         <section class="section section-lg">
             <div class="container">
-                <div class="row align-items-center">
+                <div class="row">
                     <div class="col-9">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>국문명</th>
-                                    <th>지역</th>
-                                    <th>시대</th>
-                                    <th>위도</th>
-                                    <th>경도</th>
-                                    <th>분류</th>
-                                    <th>코멘트</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableContents"></tbody>
-                        </table>
+                        <div id="map" style="width:100%; height:100%;"></div>
                     </div>
+
                     <div class="col-3">
                         <div class="card shadow">
                             <img class="card-image-top rounded-top" id="card-image" src="{{ ASSETS_ROOT }}/img/transparent.png">
@@ -74,26 +62,42 @@
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% include 'includes/kakaomap.html' %}
     <script>
-        $(document).ready(function() {
-            var post_detail = {{ post_detail|safe }};
-            $.each(post_detail, function(index, item) {
-                var tableContent = `<tr id="row${item.order}">`
-                                        + `<td>${item.ccbaMnm1}</td>`
-                                        + `<td>${item.ccbaCtcdNm}</td>`
-                                        + `<td>${item.ccbaPcd1Nm}</td>`
-                                        + `<td>${item.longitude}</td>`
-                                        + `<td>${item.latitude}</td>`
-                                        + `<td>${item.ccmaName} ${item.crltsnoNm}호</td>`
-                                        + `<td>${item.comment}</td>`
-                                    + `</tr>`;
-                $(tableContent).appendTo("#tableContents").on("click", function() {
-                    $("#card-image").attr("src", item.imageUrl);
-                    $("#card-title").text(item.ccbaMnm1);
-                    $("#card-content").html(item.ccbaCtcdNm + "|" + item.ccbaPcd1Nm + "<br>" + item.ccmaName + item.crltsnoNm + "호");
-                    $("#card-comment").text(item.comment);
-                });
-            });
-        });
+    var container = document.getElementById("map");
+    var options = {
+        center: new kakao.maps.LatLng(36.2683, 127.6358),
+        level: 13
+    };
+    var map = new kakao.maps.Map(container, options);
+
+    var obj_list = {{ obj_list|safe }};
+    let linePath = [];
+    $.each(obj_list, function(i, data) {
+        linePath.push(new kakao.maps.LatLng(data.latitude, data.longitude));
+    });
+
+    var polyline = new kakao.maps.Polyline({
+        path: linePath,
+        strokeWeight: 5,
+        strokeColor: "#174F84",
+        strokeOpacity: 1,
+        strokeStyle: "solid",
+        endArrow: true
+    });
+    polyline.setMap(map);
+
+    if (linePath.length % 2 == 1) {
+        index = (linePath.length - 1) / 2;
+        var centerPath = linePath[index];
+    } else {
+        index = linePath.length / 2;
+        latitude = (linePath[index].getLat() + linePath[index].getLat()) / 2;
+        longitude = (linePath[index].getLng() + linePath[index].getLng()) / 2;
+        var centerPath = new kakao.maps.LatLng(latitude, longitude);
+    }
+
+    map.setCenter(centerPath);
+
     </script>
 {% endblock javascripts %}

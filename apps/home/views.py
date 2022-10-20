@@ -81,7 +81,7 @@ def route_bulletin(request):
 
 def route_view(request, id):
     post = route.objects.get(id=id)
-    post_detail = list()
+    obj_list = list()
 
     for detail in post.routedetail_set.all():
         detail_h = detail.ccbaCpno
@@ -97,9 +97,9 @@ def route_view(request, id):
             "longitude":detail_h.longitude,
             "latitude":detail_h.latitude
         }
-        post_detail.append(detail_dict)
+        obj_list.append(detail_dict)
 
-    context = {"post": post, "post_detail": post_detail}
+    context = {"post": post, "obj_list": obj_list}
     return render(request, "home/route-view.html", context)
 
 
