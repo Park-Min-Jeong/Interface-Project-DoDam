@@ -9,7 +9,7 @@
         border-right: 1px solid black;
     }
     td:nth-child(1) {
-        width : 30px;
+        width : 100px;
         text-align: center;
     }
     td:nth-child(2) {
@@ -58,16 +58,17 @@
         <section class="section section-lg">
             <div class="container"> <!--div 태그에 align을 지정하면 정렬기준 설정 가능한듯 함. style=""로 준 게 아님. -->
                 <table class="table table-hover"> <!--visitorapp\templates\visitor_crud.html 7~18번째 코드 참고함-->
-                {% for vdata in page_obj %}
-                    <thead>
+                <thead>
                         <tr>
                             <th>글 번호</th>
                             <th>작성자</th>
+                            <th>제목</th>
                             <th>상태</th>
                             <th>등록일시</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for vdata in page_obj %}
                         <tr>
                             <td>{{ vdata.id }}</td>
 <!--                          <td>{{ vdata.writer }}<span onclick="read_reply({{ vdata.pk }})">({{vdata.reply_set.values|length}})</span></td>--><!--visitorapp의 visitor_crud.html 11번째 있는 코드인데 괄호 안에 댓글 수가 출력되도록 한 코드임.-->
