@@ -38,7 +38,7 @@
                             <!-- Content -->
                             <div class="card-body">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="selectall" value="selectall" onclick="selectAll(this)"><b>전체</b><br>
+                                    <input class="form-check-input" type="checkbox" name="heritage" value="selectall" onclick="selectAll(this)"><b>전체</b><br>
                                     <input class="form-check-input" type="checkbox" name="heritage" value="age1" onclick="checkSelectAll(this)"><b>석기</b><br>
                                     <input class="form-check-input" type="checkbox" name="heritage" value="age2" onclick="checkSelectAll(this)"><b>청동기</b><br>
                                     <input class="form-check-input" type="checkbox" name="heritage" value="age3" onclick="checkSelectAll(this)"><b>철기</b><br>
@@ -88,6 +88,7 @@ function initCheckbox()  {
 }
 
 function checkSelectAll(checkbox)  {
+
     const selectall
         = document.querySelector('input[name="selectall"]');
 

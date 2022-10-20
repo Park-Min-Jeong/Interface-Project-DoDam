@@ -69,7 +69,7 @@
                 {% if request.user.is_superuser == 1%} <!--만약 이 두 if문을 and로 묶어버리면 답변글이 없어도 관리자 계정이 아니면(xor 연산이  true가 되면) else문이 실행됨. 즉 답변글 textarea에 None이라고 출력되어있다.-->
                 <!--관리자 계정 등록이 선행되어야 함. https://sorious77.tistory.com/63 -->
                     <div style="height:50px"><button type="button" class="btn btn-success right" style="float:right" onclick="displayAnswerForm() ">답글 달기</button></div> <!--이 div와 아래 div태그 내용은 visitorapp의 visitor_crud.html에서 36~58번째 라인 참고함-->
-                {% endif %}
+                {% endif %} <!--if request.user.is_superuser == 1 의 end블록-->
                 {% else %} <!--이 else문은 if post.answer == None의 else문. 즉 등록된 답변이 있으면-->
                     <p class="left right" style="margin-top:30px; border:1px solid black; white-space:pre">{{post.answer}}</p> <!--답변글 출력-->
                 {% endif %}
@@ -104,9 +104,6 @@
 <script>
     function displayAnswerForm(){ //visitorapp의 visitor_crud.html 51번째 라인 참고
         //document.getElementsByName("answerForm").style.display = 'block'; //getElementById면 이렇게 함
-        if (request.user.is_superuser == 1){
-
-        }
         var d = document.getElementsByName("answerForm")[0]; //강사님께 물어서 이렇게 함.
         d.style.display = 'block';
     }
