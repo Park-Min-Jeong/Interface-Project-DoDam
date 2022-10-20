@@ -51,7 +51,7 @@
                                     <input class="form-check-input" type="checkbox" name="heritage" value="age10" onclick="checkSelectAll(this)"><b>조선</b><br>
                                     <input class="form-check-input" type="checkbox" name="heritage" value="age11" onclick="checkSelectAll(this)"><b>대한제국</b><br>
                                     <input class="form-check-input" type="checkbox" name="heritage" value="age12" onclick="checkSelectAll(this)"><b>일제강점기</b><br>
-                                    <input type="button" name="'initCheckboxBtn" value="초기화" onclick='initCheckbox()'>
+                                    <input type="button" name="initCheckboxBtn" value="초기화" onclick='initCheckbox()'>
                                 </div>
                             </div>
                         </div>
@@ -88,11 +88,11 @@ function initCheckbox()  {
 }
 
 function checkSelectAll(checkbox)  {
-  const selectall
-    = document.querySelector('input[name="selectall"]');
+    const selectall
+        = document.querySelector('input[name="selectall"]');
 
-  if(checkbox.checked === false)  {
-    selectall.checked = false;
+    if(checkbox.checked === false)  {
+        selectall.checked = false;
   }
 }
 

@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} 탐방 경로 게시판 {% endblock %}
+{% block title %} 탐방 경로 {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -23,12 +23,11 @@
         {% include 'includes/preloader.html' %}
 
         <!-- Header -->
-        <section class="section section-header pb-11 bg-primary text-white">
+        <section class="section section-header pb-7 bg-primary text-white">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
-                        <h1 class="display-2 mb-3">문화재 검색</h1>
-                        <p class="lead">시대별로 문화재를 검색할 수 있습니다.</p>
+                        <h1 class="display-2 mb-3">{{ post.writer.username }}님의 탐방 경로</h1>
                     </div>
                 </div>
             </div>
@@ -36,11 +35,6 @@
 
         <section class="section section-lg">
             <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h1>{{ post.writer.username }}</h1>
-                    </div>
-                </div>
                 <div class="row align-items-center">
                     <div class="col-9">
                         <table class="table table-hover">

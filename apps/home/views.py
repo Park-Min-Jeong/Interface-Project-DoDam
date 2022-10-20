@@ -24,7 +24,7 @@ def support_bulletin(request):
     context = {"page_obj":page_obj, "page_list": page_list}
     return render(request, "home/support-bulletin.html", context)
 
-#@login_required #로그인 했을때만 동작하도록 하는 키워드인데 비로그인시 그냥 404 에러를 리턴해버림
+@login_required(login_url="/login/")
 def support_write(request): #forthapp\views.py의 c() 참고함.
     if request.method == 'POST' : #주소창에 입력한 정보가 안 뜸 #POST방식으로 요청하면 DB테이블에 전달된 정보를 저장한다.
         content = request.POST.get('content')
@@ -74,7 +74,7 @@ def route_bulletin(request):
         Ctcd = ", ".join(set(Ctcd_list))
         data_list.append([data, Pcd1, Ctcd])
 
-    context = {"data_list": data_list, "page_list": page_list}
+    context = {"data_list": data_list, "page_obj":page_obj, "page_list": page_list}
 
     return render(request, "home/route-bulletin.html", context)
 
@@ -103,7 +103,7 @@ def route_view(request, id):
     return render(request, "home/route-view.html", context)
 
 
-@login_required(login_url="/login/")  # 로그인하지 않았으면 로그인 페이지로 이동
+@login_required(login_url="/login/")
 def route_write(request):
     context = None
     if request.method == "POST":
@@ -123,7 +123,7 @@ def route_write(request):
             message = request.user.username + "님의 게시글 업로드 완료!"
             success = True
         else:
-            message = "에러"
+            message = "잘못된 입력입니다."
 
         context = {"message": message, "success": success}
 

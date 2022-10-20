@@ -56,21 +56,33 @@
         </section>
 
         <section class="section section-lg">
-            <div align="center"> <!--div 태그에 align을 지정하면 정렬기준 설정 가능한듯 함. style=""로 준 게 아님. -->
-                <table> <!--visitorapp\templates\visitor_crud.html 7~18번째 코드 참고함-->
+            <div class="container"> <!--div 태그에 align을 지정하면 정렬기준 설정 가능한듯 함. style=""로 준 게 아님. -->
+                <table class="table table-hover"> <!--visitorapp\templates\visitor_crud.html 7~18번째 코드 참고함-->
                 {% for vdata in page_obj %}
-                      <tr>
-                          <td>{{ vdata.id }}</td>
+                    <thead>
+                        <tr>
+                            <th>글 번호</th>
+                            <th>작성자</th>
+                            <th>상태</th>
+                            <th>등록일시</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ vdata.id }}</td>
 <!--                          <td>{{ vdata.writer }}<span onclick="read_reply({{ vdata.pk }})">({{vdata.reply_set.values|length}})</span></td>--><!--visitorapp의 visitor_crud.html 11번째 있는 코드인데 괄호 안에 댓글 수가 출력되도록 한 코드임.-->
-                          <td>{{ vdata.writer }}</td>
-                          <td><a href = "{% url 'supportView' vdata.id%}">{{ vdata.title }}</a></td> <!--forthapp\templates\r.html의 46번째 라인 참고-->
-                          {% if vdata.answered == True %}
-                          <td>처리완료</td>
-                          {% else %}
-                          <td>처리 대기중</td>
-                          {% endif %}
-                          <td>{{ vdata.writeDT }}</td>
-                      </tr>
+                            <td>{{ vdata.writer }}</td>
+                            <td><a href = "{% url 'supportView' vdata.id%}">{{ vdata.title }}</a></td> <!--forthapp\templates\r.html의 46번째 라인 참고-->
+                            {% if vdata.answered == True %}
+                                <td>처리완료</td>
+                            {% else %}
+                                <td>처리 대기중</td>
+                            {% endif %}
+                            <td>{{ vdata.writeDT }}</td>
+                        </tr>
+                    </tbody>
+
+
                 {% endfor %}
                 </table>
                 {% include "includes/paginator.html" %}
@@ -97,7 +109,7 @@
         }
         else {  //로그인한 상태가 아니라면
             alert('로그인을 해야 글을 작성할 수 있습니다!');
-            location.href="{% url 'supportBulletin' %}";
+            location.href="{% url 'login' %}";
         }
 
 

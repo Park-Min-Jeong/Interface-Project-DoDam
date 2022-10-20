@@ -21,12 +21,11 @@
         {% include 'includes/preloader.html' %}
 
         <!-- Header -->
-        <section class="section section-header pb-11 bg-primary text-white">
+        <section class="section section-header pb-7 bg-primary text-white">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
                         <h1 class="display-2 mb-3">탐방 경로 게시판</h1>
-                        <p class="lead">이전에 탐방했던 경로 공유....</p>
                     </div>
                 </div>
             </div>
@@ -55,10 +54,9 @@
                     </tbody>
                 </table>
 
-                <button class="btn btn-primary" id="writeRouteButton" type="button" onclick="openRouteWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
-
                 <!-- paginator -->
                 {% include "includes/paginator.html" %}
+                <button class="btn btn-primary" id="writeRouteButton" type="button" onclick="openRouteWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
             </div>
         </section>
     </main>
@@ -67,7 +65,6 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         function openRouteWrite() {
             location.href = "{% url 'routeWrite' %}";
