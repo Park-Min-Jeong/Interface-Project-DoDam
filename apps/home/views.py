@@ -150,7 +150,26 @@ def route_write_search(request):
 
 
 def search(request):
-    return render(request, "home/search.html")
+    obj_list = list()
+    for Pcd1 in ["석기", "청동기", "철기", "고구려", "백제", "신라", "가야", "통일신라",
+                 "고려", "조선", "대한제국", "일제강점기"]:
+        detail_list = list()
+        for obj in heritage.objects.filter(ccbaPcd1Nm__exact=Pcd1).all():
+            detail_dict = {
+                "ccbaPcd1Nm":obj.ccbaPcd1Nm,
+                "ccbaCtcdNm":obj.ccbaCtcdNm,
+                "ccmaName":obj.ccmaName,
+                "crltsnoNm":obj.crltsnoNm,
+                "ccbaMnm1":obj.ccbaMnm1,
+                "imageUrl":obj.imageUrl,
+                "longitude":obj.longitude,
+                "latitude":obj.latitude
+            }
+            detail_list.append(detail_dict)
+        obj_list.append(detail_list)
+
+    context = {"obj_list": obj_list}
+    return render(request, "home/search.html", context)
 
 
 # def pages(request):
