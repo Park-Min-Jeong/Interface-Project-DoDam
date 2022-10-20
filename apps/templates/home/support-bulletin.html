@@ -4,37 +4,31 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-    <style>
-    td {
-        border-right: 1px solid black;
+<style>
+    th {
+        text-align:center;
     }
     td:nth-child(1) {
-        width : 100px;
+        width : 10%;
         text-align: center;
     }
     td:nth-child(2) {
-        width : 100px;
+        width : 10%;
         text-align : center;
     }
     td:nth-child(3) {
-        width : 400px;
+        width : 30%;
         padding-left: 20px;
-        border-right: 1px dotted gray;
     }
     td:nth-child(4){
-        width : 100px;
+        width : 20%;
         text-align : center;
-        border-right: 1px dotted gray;
     }
     td:nth-child(5)  {
-        width : 250px;
+        width : 20%;
         text-align : center;
-        border-right: none;
     }
-    tr:hover {
-        background : pink;
-    }
-    </style>
+</style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -58,7 +52,11 @@
         <section class="section section-lg">
             <div class="container"> <!--div 태그에 align을 지정하면 정렬기준 설정 가능한듯 함. style=""로 준 게 아님. -->
                 <table class="table table-hover"> <!--visitorapp\templates\visitor_crud.html 7~18번째 코드 참고함-->
+<<<<<<< HEAD
                 <thead>
+=======
+                    <thead>
+>>>>>>> MinJeong
                         <tr>
                             <th>글 번호</th>
                             <th>작성자</th>
@@ -71,20 +69,17 @@
                         {% for vdata in page_obj %}
                         <tr>
                             <td>{{ vdata.id }}</td>
-<!--                          <td>{{ vdata.writer }}<span onclick="read_reply({{ vdata.pk }})">({{vdata.reply_set.values|length}})</span></td>--><!--visitorapp의 visitor_crud.html 11번째 있는 코드인데 괄호 안에 댓글 수가 출력되도록 한 코드임.-->
                             <td>{{ vdata.writer }}</td>
                             <td><a href = "{% url 'supportView' vdata.id%}">{{ vdata.title }}</a></td> <!--forthapp\templates\r.html의 46번째 라인 참고-->
                             {% if vdata.answered == True %}
-                                <td>처리완료</td>
+                                <td>처리 완료</td>
                             {% else %}
                                 <td>처리 대기중</td>
                             {% endif %}
                             <td>{{ vdata.writeDT }}</td>
                         </tr>
+                        {% endfor %}
                     </tbody>
-
-
-                {% endfor %}
                 </table>
                 {% include "includes/paginator.html" %}
             </div>
