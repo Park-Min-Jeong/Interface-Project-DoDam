@@ -2,7 +2,7 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.shortcuts import render
 from .paging import make_pagenator
@@ -10,6 +10,7 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
+import json
 
 def index(request):
     context = {'segment': 'index'}
@@ -150,26 +151,32 @@ def route_write_search(request):
 
 
 def search(request):
-    obj_list = list()
+    obj_dict = dict()
     for Pcd1 in ["석기", "청동기", "철기", "고구려", "백제", "신라", "가야", "통일신라",
                  "고려", "조선", "대한제국", "일제강점기"]:
-        detail_list = list()
+        obj_dict[Pcd1] = dict()
         for obj in heritage.objects.filter(ccbaPcd1Nm__exact=Pcd1).all():
-            detail_dict = {
-                "ccbaPcd1Nm":obj.ccbaPcd1Nm,
-                "ccbaCtcdNm":obj.ccbaCtcdNm,
-                "ccmaName":obj.ccmaName,
-                "crltsnoNm":obj.crltsnoNm,
-                "ccbaMnm1":obj.ccbaMnm1,
-                "imageUrl":obj.imageUrl,
-                "longitude":obj.longitude,
-                "latitude":obj.latitude
+            obj_dict[Pcd1][obj.ccbaCpno] =  {
+                "ccbaPcd1Nm": obj.ccbaPcd1Nm,
+                "ccbaCtcdNm": obj.ccbaCtcdNm,
+                "ccmaName": obj.ccmaName,
+                "crltsnoNm": obj.crltsnoNm,
+                "ccbaMnm1": obj.ccbaMnm1,
+                "imageUrl": obj.imageUrl,
+                "longitude": obj.longitude,
+                "latitude": obj.latitude
             }
-            detail_list.append(detail_dict)
-        obj_list.append(detail_list)
 
-    context = {"obj_list": obj_list}
-    return render(request, "home/search.html", context)
+    if request.method == "POST":
+        pcd1_list = json.loads(request.POST.get("pcd1_list"))
+        print(pcd1_list)
+        result_dict = dict()
+        for pcd1 in pcd1_list:
+            result_dict[pcd1] = obj_dict[pcd1]
+
+        return JsonResponse(result_dict, json_dumps_params={"ensure_ascii": False})
+    else:
+        return render(request, "home/search-2.html")
 
 
 # def pages(request):
