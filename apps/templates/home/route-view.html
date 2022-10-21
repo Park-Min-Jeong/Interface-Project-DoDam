@@ -5,13 +5,26 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
     <style>
+        .info-window {
+            width: 120px;
+            height: 50px;
+        }
+        .info-image {
+            margin: 5px;
+            width: 40px;
+            height: 40px;
+        }
+        .info-text {
+            margin: auto;
+            font-size: x-small;
+        }
         .card {
-            width:100%;
-            aspect-ratio:1/2;
+            width: 100%;
+            aspect-ratio: 1/2;
         }
         #card-image {
-            width:100%;
-            aspect-ratio:1/1;
+            width: 100%;
+            aspect-ratio: 1/1;
         }
     </style>
 {% endblock stylesheets %}
@@ -64,40 +77,83 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {% include 'includes/kakaomap.html' %}
     <script>
-    var container = document.getElementById("map");
-    var options = {
-        center: new kakao.maps.LatLng(36.2683, 127.6358),
-        level: 13
+    function loadMap() {
+            var container = document.getElementById("map");
+            var options = {
+                center: new kakao.maps.LatLng(35.834636328158915, 127.7235675736344),
+                level: 14
+            };
+            var map = new kakao.maps.Map(container, options);
+            var clusterer = new kakao.maps.MarkerClusterer({
+                map: map,
+                minLevel:10
+            });
+            var bounds = new kakao.maps.LatLngBounds();
+
+            var obj_list = {{ obj_list|safe }};
+
+            let linePath = [];
+            $.each(obj_list, function(i, data) {
+                position = new kakao.maps.LatLng(data.latitude, data.longitude)
+                linePath.push(position);
+                bounds.extend(position);
+            });
+
+            if (obj_list.length > 1) {
+                var polyline = new kakao.maps.Polyline({
+                    path: linePath,
+                    strokeWeight: 5,
+                    strokeColor: "#2A354F",
+                    strokeOpacity: 1,
+                    strokeStyle: "solid",
+                    endArrow: true
+                });
+                polyline.setMap(map);
+            };
+
+            var markers = $(obj_list).map(function(i, data) {
+                var marker = new kakao.maps.Marker({
+                    position: new kakao.maps.LatLng(data.latitude, data.longitude),
+                    clickable: true
+                });
+
+                var content = '<div class=info-window onclick=closeOverlay()">'
+                                + '<div class="row align-items-center">'
+                                    + '<div class="col-4">'
+                                        + '<img class="info-image" src=' + data.imageUrl +'>'
+                                        + '</div>'
+                                    + '<div class="col-8">'
+                                        + '<p class="info-text">'+ data.ccbaMnm1 +'</p>'
+                                    + '</div>'
+                                + '</div>'
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: content,
+                    remove: true
+                });
+
+                kakao.maps.event.addListener(marker, "mouseover", function() {
+                    infowindow.open(map, marker);
+                });
+                kakao.maps.event.addListener(marker, "mouseout", function() {
+                    infowindow.close();
+                });
+
+                kakao.maps.event.addListener(marker, "click", function() {
+                    $("#card-image").attr("src", data.imageUrl);
+                    $("#card-title").text(data.ccbaMnm1);
+                    $("#card-content").html(data.ccbaPcd1Nm + " | " + data.ccbaCtcdNm + "<br>" + data.ccmaName + data.crltsnoNm + "호");
+                    $("#card-comment").text(data.comment);
+                });
+
+                return marker;
+            });
+            clusterer.addMarkers(markers);
+        map.setBounds(bounds);
     };
-    var map = new kakao.maps.Map(container, options);
 
-    var obj_list = {{ obj_list|safe }};
-    let linePath = [];
-    $.each(obj_list, function(i, data) {
-        linePath.push(new kakao.maps.LatLng(data.latitude, data.longitude));
+    $(document).ready(function() {
+        loadMap();
     });
-
-    var polyline = new kakao.maps.Polyline({
-        path: linePath,
-        strokeWeight: 5,
-        strokeColor: "#174F84",
-        strokeOpacity: 1,
-        strokeStyle: "solid",
-        endArrow: true
-    });
-    polyline.setMap(map);
-
-    if (linePath.length % 2 == 1) {
-        index = (linePath.length - 1) / 2;
-        var centerPath = linePath[index];
-    } else {
-        index = linePath.length / 2;
-        latitude = (linePath[index].getLat() + linePath[index].getLat()) / 2;
-        longitude = (linePath[index].getLng() + linePath[index].getLng()) / 2;
-        var centerPath = new kakao.maps.LatLng(latitude, longitude);
-    }
-
-    map.setCenter(centerPath);
 
     </script>
 {% endblock javascripts %}

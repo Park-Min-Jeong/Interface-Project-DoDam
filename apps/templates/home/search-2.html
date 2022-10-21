@@ -1,0 +1,177 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} 문화재 검색 {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+    <style>
+        .info-window {
+            width: 240px;
+            height: 100px;
+        }
+        .info-image {
+            margin: 10px;
+            width: 80px;
+            height: 80px;
+        }
+        .info-text {
+            margin: auto;
+            font-size: small;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section section-header pb-7 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">문화재 검색</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card shadow text-center">
+                            <div class="card-header bg-white p-3">
+                                <h3 class="text-primary mt-auto mb-auto">시대</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="form-check text-left">
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="0">석기<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="1">청동기<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="2">철기<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="3">고구려<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="4">백제<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="5">신라<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="6">가야<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="7">통일신라<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="8">고려<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="9">조선<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="10">대한제국<br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="11">일제강점기<br>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <button class="btn btn-sm btn-primary" value="selectAll"><span class="fas fa-check-double"></span></button>
+                                        <button class="btn btn-sm btn-primary" value="initCheckbox"><span class="fas fa-redo"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 지도 -->
+                    <div class="col-9">
+                        <div id="map" style="width:100%; height:100%;"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% include 'includes/kakaomap.html' %}
+<script>
+    function reloadMap() {
+        var container = document.getElementById("map");
+        var options = {
+            center: new kakao.maps.LatLng(35.834636328158915, 127.7235675736344),
+            level: 14
+        };
+        var map = new kakao.maps.Map(container, options);
+
+        var clusterer = new kakao.maps.MarkerClusterer({
+            map: map,
+            minLevel:10
+        });
+    };
+
+
+    function selectCheckbox() {
+        var checkNum = $(this).is(":checked").length;
+
+        if (checkNum == 0) {
+            reloadMap();
+        } else {
+            clusterer.clear();
+            $(this).is(":checked").each(function() {
+                var value = $(this).val();
+                var detail_list = {{ obj_list|safe }}[value];
+
+                var markers = $(detail_list).map(function(i, data) {
+                    var marker = new kakao.maps.Marker({
+                        position: new kakao.maps.LatLng(data.latitude, data.longitude),
+                        clickable: true
+                    });
+
+                    var content = '<div class=info-window">'
+                                        + '<div class="row align-items-center">'
+                                            + '<div class="col-4">'
+                                                + '<img class="info-image" src=' + data.imageUrl +'>'
+                                            + '</div>'
+                                            + '<div class="col-8">'
+                                                + '<p class="info-text">'+ data.ccbaMnm1
+                                                + '<br>' + data.ccbaPcd1Nm + ' | ' + data.ccbaCtcdNm
+                                                + '<br>' + data.ccmaName + ' ' + data.crltsnoNm  + '호' +'</p>'
+                                            + '</div>'
+                                        + '</div>'
+                                     + '</div>';
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: content
+                    });
+                    kakao.maps.event.addListener(marker, "mouseover", function() {
+                        infowindow.open(map, marker);
+                    });
+                    kakao.maps.event.addListener(marker, "mouseout", function() {
+                        infowindow.close();
+                    });
+                    return marker;
+                });
+                clusterer.addMarkers(markers);
+
+            });
+        };
+    };
+
+    $("input:checkbox[name=heritage]").on("click", selectCheckbox());
+
+    $("button[value='initCheckbox']").on("click", function() {
+        $("input:checkbox[name=heritage]").prop("checked", false);
+        reloadMap();
+    });
+
+    $("button[value='selectAll']").on("click", function() {
+        var checkNum = $("input:checkbox[name=heritage]:checked").length;
+        console.log(checkNum);
+        if (checkNum == 12) {
+            $("input:checkbox[name=heritage]").prop("checked", false);
+        } else {
+            $("input:checkbox[name=heritage]").prop("checked", true);
+        };
+        $("input:checkbox[name=heritage]").on("click", selectCheckbox());
+    });
+
+
+    $(document).ready(function() {
+        reloadMap();
+    });
+
+
+</script>
+{% endblock javascripts %}

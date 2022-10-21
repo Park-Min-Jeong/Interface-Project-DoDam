@@ -5,11 +5,27 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
     <style>
-        .card {
-            height:300px;
+        th {
+            text-align:center;
         }
-        .card-image-top {
-            height:100px;
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        td:nth-child(1) {
+            width : 15%;
+        }
+        td:nth-child(2) {
+            width : 15%;
+        }
+        td:nth-child(3) {
+            width : 40%;
+        }
+        td:nth-child(4){
+            width : 30%;
+        }
+        .container {
+            text-align: center;
         }
     </style>
 {% endblock stylesheets %}
@@ -33,13 +49,15 @@
 
         <section class="section section-lg">
             <div class="container">
+
+                <!-- 게시글 목록 -->
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>글 번호</th>
                             <th>작성자</th>
-                            <th>지역</th>
                             <th>시대</th>
+                            <th>지역</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,9 +72,9 @@
                     </tbody>
                 </table>
 
-                <!-- paginator -->
                 {% include "includes/paginator.html" %}
                 <button class="btn btn-primary" id="writeRouteButton" type="button" onclick="openRouteWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
+
             </div>
         </section>
     </main>

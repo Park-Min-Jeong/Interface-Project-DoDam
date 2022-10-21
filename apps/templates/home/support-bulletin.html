@@ -4,46 +4,47 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-<style>
-    th {
-        text-align:center;
-    }
-    td:nth-child(1) {
-        width : 10%;
-        text-align: center;
-    }
-    td:nth-child(2) {
-        width : 10%;
-        text-align : center;
-    }
-    td:nth-child(3) {
-        width : 30%;
-        padding-left: 20px;
-    }
-    td:nth-child(4){
-        width : 20%;
-        text-align : center;
-    }
-    td:nth-child(5)  {
-        width : 20%;
-        text-align : center;
-    }
-</style>
+    <style>
+        th {
+            text-align: center;
+        }
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        td:nth-child(1) {
+            width : 15%;
+        }
+        td:nth-child(2) {
+            width : 15%;
+        }
+        td:nth-child(3) {
+            width : 40%;
+        }
+        td:nth-child(4){
+            width : 15%;
+        }
+        td:nth-child(5)  {
+            width : 15%;
+        }
+        .container {
+            text-align: center;
+        }
+    </style>
 {% endblock stylesheets %}
 
 {% block content %}
 
     <main>
 
-<!--        {% include 'includes/preloader.html' %}-->
+        {% include 'includes/preloader.html' %}
 
         <!-- Header -->
-        <section class="section section-header pb-11 bg-primary text-white">
+        <section class="section section-header pb-7 bg-primary text-white">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
                         <h1 class="display-2 mb-3">문의 게시판</h1>
-                        <p class="lead">문의 사항 작성</p>
                     </div>
                 </div>
             </div>
@@ -51,6 +52,8 @@
 
         <section class="section section-lg">
             <div class="container"> <!--div 태그에 align을 지정하면 정렬기준 설정 가능한듯 함. style=""로 준 게 아님. -->
+
+                <!-- 게시글 목록 -->
                 <table class="table table-hover"> <!--visitorapp\templates\visitor_crud.html 7~18번째 코드 참고함-->
                     <thead>
                         <tr>
@@ -62,28 +65,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for vdata in page_obj %}
+                        {% for data in page_obj %}
                         <tr>
-                            <td>{{ vdata.id }}</td>
-                            <td>{{ vdata.writer }}</td>
-                            <td><a href = "{% url 'supportView' vdata.id%}">{{ vdata.title }}</a></td> <!--forthapp\templates\r.html의 46번째 라인 참고-->
-                            {% if vdata.answered == True %}
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.writer }}</td>
+                            <td><a href = "{% url 'supportView' data.id%}">{{ data.title }}</a></td> <!--forthapp\templates\r.html의 46번째 라인 참고-->
+                            {% if data.answered == True %}
                                 <td>처리 완료</td>
                             {% else %}
                                 <td>처리 대기중</td>
                             {% endif %}
-                            <td>{{ vdata.writeDT }}</td>
+                            <td>{{ data.writeDT }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+
                 {% include "includes/paginator.html" %}
+<!--                <button class="btn btn-primary"  style = "float: right; margin-right: 20%" type="button" onclick=login_check(); return false;>작성</button>-->
+
+                <button class="btn btn-primary" id="writeSupportButton" type="button" onclick="openSupportWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
+
+
             </div>
 
 <!--            {% if request.user.is_authenticated %}  &lt;!&ndash;장고 템플릿 언어에서는 함수 호출을 위해 괄호를 사용하지 않음&ndash;&gt;-->
 <!--            <a style = "float : right;" href="{% url 'supportWrite' %}"><button class="btn btn-primary" type="button">작성</button></a>-->
 <!--            {% endif %}--> <!--이 코드 대신 아래의 자바스크립트로 구현함-->
-            <button class="btn btn-primary"  style = "float : right; margin-right: 20%" type="button" onclick=login_check(); return false;>작성</button>
 
         </section>
 
@@ -106,5 +114,9 @@
 
 
     }
+
+    function openSupportWrite() {
+        location.href = "{% url 'supportWrite' %}";
+    };
 </script>
 {% endblock javascripts %}
