@@ -77,6 +77,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {% include 'includes/kakaomap.html' %}
     <script>
+    function compareLatLng(path) {
+        var latitude;
+        var longitude;
+        var pad = 0.01;
+
+        if (path[0].getLat() < path[1].getLat()) {
+            latitude = path[1].getLat() - pad;
+        } else if (path[0].getLat() > path[1].getLat()) {
+            latitude = path[1].getLat() + pad;
+        }
+        if (path[0].getLng() < path[1].getLng()) {
+            longitude = path[1].getLng() - pad;
+        } else if (path[0].getLng() > path[1].getLng()) {
+            longitude = path[1].getLng() + pad
+        }
+        path[1] = new kakao.maps.LatLng(latitude, longitude);
+        return path
+    };
+
     function loadMap() {
             var container = document.getElementById("map");
             var options = {
@@ -99,9 +118,11 @@
                 bounds.extend(position);
             });
 
-            if (obj_list.length > 1) {
+            for (let i=0; i<(obj_list.length-1); i++) {
+                path = compareLatLng(linePath.slice(i, i+2));
+
                 var polyline = new kakao.maps.Polyline({
-                    path: linePath,
+                    path: path,
                     strokeWeight: 5,
                     strokeColor: "#2A354F",
                     strokeOpacity: 1,
@@ -110,6 +131,7 @@
                 });
                 polyline.setMap(map);
             };
+
 
             var markers = $(obj_list).map(function(i, data) {
                 var marker = new kakao.maps.Marker({
