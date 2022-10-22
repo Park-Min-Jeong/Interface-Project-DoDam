@@ -2,7 +2,6 @@
 
 {% block title %} 문의 게시판 {% endblock %}
 
-<!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
     <style>
         th {
@@ -66,10 +65,10 @@
                     </thead>
                     <tbody>
                         {% for data in page_obj %}
-                        <tr>
+                        <tr onclick="location.href='{% url 'supportView' data.id %}'">
                             <td>{{ data.id }}</td>
                             <td>{{ data.writer }}</td>
-                            <td><a href = "{% url 'supportView' data.id%}">{{ data.title }}</a></td> <!--forthapp\templates\r.html의 46번째 라인 참고-->
+                            <td>{{ data.title }}</td>
                             {% if data.answered == True %}
                                 <td>처리 완료</td>
                             {% else %}
@@ -82,39 +81,18 @@
                 </table>
 
                 {% include "includes/paginator.html" %}
-<!--                <button class="btn btn-primary"  style = "float: right; margin-right: 20%" type="button" onclick=login_check(); return false;>작성</button>-->
 
                 <button class="btn btn-primary" id="writeSupportButton" type="button" onclick="openSupportWrite()"><span class="fas fa-pen-alt me-2"></span>작성</button>
 
 
             </div>
-
-<!--            {% if request.user.is_authenticated %}  &lt;!&ndash;장고 템플릿 언어에서는 함수 호출을 위해 괄호를 사용하지 않음&ndash;&gt;-->
-<!--            <a style = "float : right;" href="{% url 'supportWrite' %}"><button class="btn btn-primary" type="button">작성</button></a>-->
-<!--            {% endif %}--> <!--이 코드 대신 아래의 자바스크립트로 구현함-->
-
         </section>
-
     </main>
 
 {% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-<script> <!--https://stackoverflow.com/questions/51804687/python-django-request-user-is-authenticated-in-template-tag-not-working 참고했음--> <!--구글에 "자바스크립트 if request.user.is_authenticated" 검색해서 2번째 사이트-->
-    var user_is_authenticated = {{ request.user.is_authenticated|yesno:"true,false" }}; //필터링 //yesno는 https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#:~:text=is%20a%0Aslug-,yesno,-%C2%B6 참고
-    function login_check(){                 //request객체는 뷰함수에서 리턴값으로 넣어주는 것임. user는 request객체의 user고.
-        if (user_is_authenticated === true) {   //로그인 했다면
-            location.href="{% url 'supportWrite' %}";
-        }
-        else {  //로그인한 상태가 아니라면
-            alert('로그인을 해야 글을 작성할 수 있습니다!');
-            location.href="{% url 'login' %}";
-        }
-
-
-    }
-
+<script>
     function openSupportWrite() {
         location.href = "{% url 'supportWrite' %}";
     };

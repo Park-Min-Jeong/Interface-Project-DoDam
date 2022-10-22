@@ -59,7 +59,7 @@
                             <div class="card-body">
                             <h6 class="card-title" id="card-title"></h6>
                                 <p class="card-text" id="card-content" style="color:dimgray"></p>
-                                <p class="card-text" id="card-comment"></p>
+                                <p class="card-text" id="card-comment" style="color:black"></p>
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,8 @@
             });
 
             for (let i=0; i<(obj_list.length-1); i++) {
-                path = compareLatLng(linePath.slice(i, i+2));
+                // path = compareLatLng(linePath.slice(i, i+2));
+                path = linePath.slice(i, i+2);
 
                 var polyline = new kakao.maps.Polyline({
                     path: path,
@@ -169,7 +170,7 @@
                     $("#card-image").attr("src", data.imageUrl);
                     $("#card-title").text(data.ccbaMnm1);
                     $("#card-content").html(data.ccbaPcd1Nm + " | " + data.ccbaCtcdNm + "<br>" + data.ccmaName + data.crltsnoNm + "호");
-                    $("#card-comment").text(data.comment);
+                    $("#card-comment").html("<hr>" + data.comment);
                 });
 
                 return marker;

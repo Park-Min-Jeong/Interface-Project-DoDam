@@ -2,7 +2,6 @@
 
 {% block title %} 경로 검색 {% endblock %}
 
-<!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 {% endblock stylesheets %}
 
@@ -44,7 +43,7 @@
                                         <p class="card-text">{{ data.ccbaPcd1Nm }} | {{ data.ccbaCtcdNm }}<br>{{ data.ccmaName }} {{ data.crltsnoNm }}호</p>
                                     </div>
                                     <div class="col-2 align-self-center">
-                                        <button class="btn btn-outline-primary d-lg-inline me-md-3" onclick="closeAndReturn({{ data.ccbaCpno }}, {{ order }})"><span class="fas fa-check"></span></button>
+                                        <button class="btn btn-outline-primary btn-icon-only d-lg-inline me-md-3" onclick="closeAndReturn({{ data.ccbaCpno }}, {{ order }})"><span class="fas fa-check"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +59,6 @@
 
 {% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <script>
     function closeAndReturn(ccbaCpno, order) {

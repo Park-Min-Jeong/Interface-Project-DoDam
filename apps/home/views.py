@@ -8,7 +8,6 @@ from django.shortcuts import render
 from .paging import make_pagenator
 from .models import *
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
 import json
 
@@ -26,27 +25,31 @@ def support_bulletin(request):
     return render(request, "home/support-bulletin.html", context)
 
 @login_required(login_url="/login/")
-def support_write(request): #forthapp\views.py의 c() 참고함.
-    if request.method == 'POST' : #주소창에 입력한 정보가 안 뜸 #POST방식으로 요청하면 DB테이블에 전달된 정보를 저장한다.
-        content = request.POST.get('content')
-        title = request.POST.get('title')
+def support_write(request):
+    context = None
+    if request.method == "POST":
+        try:
+            title = request.POST.get("title")
+            content = request.POST.get("content")
+            user = User.objects.get(pk=request.user.id)
 
-        if request.user.is_authenticated: #사용자가 로그인을 했다면
-            #user = User.objects.get(username=request.user.username) #이 경우 후보키인 username으로 회원정보를 얻어오고
-            user = User.objects.get(pk=request.user.id)             #이 경우 주 키인 id로 회원정보를 얻어옴. 구글에서 "django 로그인 사용자 가져오기" 검색했음. 사이트 링크는 이메일로 저장해둠.
-            context = {"msg": request.user.username+"님의 게시글 업로드 완료!" }
-            writer = user
-            # writeDT는 자동.
-            sup = support(title=title, writer=writer, question=content, answer=None, answered=0)  # support 테이블에 내용
-            sup.save()  # 저장
-        else: #사용자가 로그인을 안 했다면 #게시글 작성이 안 되게 구현해야 함.(코드 수정 필요)
-            #user = User.objects.get(pk=1)  #처음에는 비로그인 상태에서는 1번 사용자로 user값을 줬음 # Visitorapp views.py의 48번째 라인 reply_create() 참고 #https://docs.djangoproject.com/en/4.1/topics/auth/default/#user-objects 도 참고 #pk는 primarykey
-            #context = {"msg": "게시글 업로드 완료!"}
-            # 아래 코드로 비로그인 상태에서는 게시글 작성이 안되도록 함 #일단 1차적으로 비로그인 상태라면 supportBulletin.html에서 작성 버튼이 안 보임.
-            context = {"msg": "로그인 필요!" }
-    else : #POST가 아닌 GET방식으로 요청하면 None을 전달하면서 support-write.html에게 렌더링을 시킨다.
-        context = None
-    return render(request, "home/support-write.html", context)
+            if title == "" or content == "":
+                raise
+
+            sup = support(title=title, writer=user, question=content, answer=None, answered=0)
+            sup.save()
+        except:
+            message = "잘못된 입력입니다."
+            success = False
+        else:
+            message = request.user.username + "님의 게시글이 저장되었습니다."
+            success = True
+
+        context = {"message": message, "success": success}
+
+    return render(request, "home/support-write-2.html", context)
+    # return render(request, "home/support-write.html", context)
+
 
 def support_view(request, id): #forthapp\views.py의 u()와 r() 참고
     post = support.objects.get(id=id) #왼쪽 id는 support 테이블의 primary key인 id #오른쪽 id는 주소창의 supportView/뒤에 오는 숫자 값으로 글의 id값을 넘겨받음
@@ -57,13 +60,13 @@ def support_view(request, id): #forthapp\views.py의 u()와 r() 참고
         post.answer = answering #될지 모르고 해본건데 됐음
         post.answered = 1   #1은 y, 0은 n
         post.save()         # 저장
-    context = {"post" : post, "answerContent":answering}
+    context = {"post": post, "answerContent": answering}
     return render(request, "home/support-view.html", context)
 
 
 def route_bulletin(request):
     obj_list = route.objects.all().order_by("-id")
-    page_obj, page_list = make_pagenator(page=request.GET.get("page", 1), num=3, obj_list=obj_list)
+    page_obj, page_list = make_pagenator(page=request.GET.get("page", 1), num=5, obj_list=obj_list)
 
     data_list = list()
     for data in page_obj:
@@ -109,21 +112,25 @@ def route_write(request):
     context = None
     if request.method == "POST":
         success = False
-        ccbaCpno = request.POST.getlist("ccbaCpno")
-        comments = request.POST.getlist("comments")
-        user = User.objects.get(pk=request.user.id)
 
-        if "" not in ccbaCpno:
+        try:
+            ccbaCpno = request.POST.getlist("ccbaCpno")
+            comments = request.POST.getlist("comments")
+            user = User.objects.get(pk=request.user.id)
+
+            if "" in ccbaCpno:
+                raise
+
             r_list = route(writer=user)
             r_list.save()
-            p_id = route.objects.last().id
+            post_id = route.objects.last().id
             for i in range(len(ccbaCpno)):
-                r_detail = routeDetail(order=i+1, comment=comments[i], ccbaCpno_id=ccbaCpno[i], post_id=p_id)
+                r_detail = routeDetail(order=i+1, comment=comments[i], ccbaCpno_id=ccbaCpno[i], post_id=post_id)
                 r_detail.save()
 
-            message = request.user.username + "님의 게시글 업로드 완료!"
+            message = request.user.username + "님의 게시글이 저장되었습니다."
             success = True
-        else:
+        except:
             message = "잘못된 입력입니다."
 
         context = {"message": message, "success": success}
