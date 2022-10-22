@@ -103,6 +103,11 @@
                 level: 14
             };
             var map = new kakao.maps.Map(container, options);
+
+            var changeMaptype;
+            changeMaptype = kakao.maps.MapTypeId.SKYVIEW;
+            map.setMapTypeId(changeMaptype);
+
             var clusterer = new kakao.maps.MarkerClusterer({
                 map: map,
                 minLevel:10
@@ -124,7 +129,7 @@
                 var polyline = new kakao.maps.Polyline({
                     path: path,
                     strokeWeight: 5,
-                    strokeColor: "#2A354F",
+                    strokeColor: "#FA5252",
                     strokeOpacity: 1,
                     strokeStyle: "solid",
                     endArrow: true

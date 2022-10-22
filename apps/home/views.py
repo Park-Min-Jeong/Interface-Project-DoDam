@@ -148,15 +148,13 @@ def route_write_search(request):
     return render(request, "home/route-write-search.html", context)
 
 
-
-
 def search(request):
     obj_dict = dict()
     for Pcd1 in ["석기", "청동기", "철기", "고구려", "백제", "신라", "가야", "통일신라",
                  "고려", "조선", "대한제국", "일제강점기"]:
-        obj_dict[Pcd1] = dict()
+        obj_dict[Pcd1] = list()
         for obj in heritage.objects.filter(ccbaPcd1Nm__exact=Pcd1).all():
-            obj_dict[Pcd1][obj.ccbaCpno] =  {
+            obj_dict[Pcd1].append({
                 "ccbaPcd1Nm": obj.ccbaPcd1Nm,
                 "ccbaCtcdNm": obj.ccbaCtcdNm,
                 "ccmaName": obj.ccmaName,
@@ -165,7 +163,7 @@ def search(request):
                 "imageUrl": obj.imageUrl,
                 "longitude": obj.longitude,
                 "latitude": obj.latitude
-            }
+            })
 
     if request.method == "POST":
         pcd1_list = json.loads(request.POST.get("pcd1_list"))
@@ -176,7 +174,7 @@ def search(request):
 
         return JsonResponse(result_dict, json_dumps_params={"ensure_ascii": False})
     else:
-        return render(request, "home/search-2.html")
+        return render(request, "home/search.html")
 
 
 # def pages(request):
