@@ -16,6 +16,7 @@ urlpatterns = [
     path("supportView/<int:id>", views.support_view, name="supportView"),
     path("supportWrite/", views.support_write, name="supportWrite"),
 
+
     # Matches any html file
     # re_path(r"^.*\.*", views.pages, name="pages"),
 ]

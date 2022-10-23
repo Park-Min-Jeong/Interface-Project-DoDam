@@ -149,8 +149,10 @@ def route_write_search(request):
 
 
 
+
 def search(request):
     return render(request, "home/search.html")
+
 
 
 # def pages(request):
