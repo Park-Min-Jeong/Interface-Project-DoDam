@@ -4,6 +4,9 @@
 
 {% block stylesheets %}
     <style>
+        h3 {
+            margin: auto;
+        }
         .info-window {
             width: 240px;
             height: 100px;
@@ -31,7 +34,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
-                        <h1 class="display-2 mb-3">문화재 검색</h1>
+                        <h1 class="display-2">문화재 검색</h1>
                     </div>
                 </div>
             </div>
@@ -40,7 +43,7 @@
         <section class="section section-lg">
             <div class="container">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="card shadow text-center">
                             <div class="card-header bg-white p-3">
                                 <h3 class="text-primary mt-auto mb-auto">시대</h3>
@@ -70,7 +73,7 @@
                     </div>
 
                     <!-- 지도 -->
-                    <div class="col-9">
+                    <div class="col-10">
                         <div id="map" style="width:100%; height:100%;"></div>
                     </div>
                 </div>
@@ -96,6 +99,7 @@
             map: map,
             minLevel: 10
         });
+        clusterer.clear();
     }
 
     function ajax_load_data(checked_value) {

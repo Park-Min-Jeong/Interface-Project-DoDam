@@ -47,6 +47,7 @@ def support_write(request):
 
         context = {"message": message, "success": success}
 
+    # support-write와 support-write-2 스타일 차이
     return render(request, "home/support-write-2.html", context)
     # return render(request, "home/support-write.html", context)
 
