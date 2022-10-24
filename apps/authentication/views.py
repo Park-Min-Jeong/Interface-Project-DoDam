@@ -57,4 +57,4 @@ def policy(request):
     return render(request, "accounts/policy.html")
 
 def newPw(request):
-    return render(request, "accounts/newPw.htnl")
+    return render(request, "accounts/newPw.html",)
