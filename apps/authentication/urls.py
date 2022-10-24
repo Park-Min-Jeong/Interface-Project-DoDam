@@ -7,6 +7,9 @@ from django.urls import path
 from .views import *
 from django.contrib.auth.views import LogoutView
 
+#sooeun
+from . import views
+
 urlpatterns = [
     path("login/", login_view, name="login"),
     path("register/", register_user, name="register"),
@@ -14,4 +17,5 @@ urlpatterns = [
     path("policy/", policy, name="policy"),
     path("policyCheck/", policy_check, name="policyCheck"),
     path("newPw/", newPw, name="newPw"),
+    path("send_email/", views.send_email, name='send_email'),
 ]
