@@ -123,21 +123,112 @@
 
                 var polyline = new kakao.maps.Polyline({
                     path: path,
-                    strokeWeight: 5,
-                    strokeColor: "#2A354F",
-                    strokeOpacity: 1,
-                    strokeStyle: "solid",
-                    endArrow: true
+                    strokeWeight: 5, //줄 굵기
+                    strokeColor: "#FF0000", //줄 색상 //#2A354F
+                    strokeOpacity: 1, //줄 투명도
+                    strokeStyle: "solid", //실선
+                    endArrow: true //화살표 유무
                 });
                 polyline.setMap(map);
             };
 
 
-            var markers = $(obj_list).map(function(i, data) {
+            //sdh1 시작
+            var imageSrc = [];
+            imageSrc[0] = "{{ ASSETS_ROOT }}/img/illustrations/gray-marker.png";    //선사시대      //회색
+            imageSrc[1] = "{{ ASSETS_ROOT }}/img/illustrations/green-marker.png";   //청동기시대    //초록색
+            imageSrc[2] = "{{ ASSETS_ROOT }}/img/illustrations/lime-marker.png";    //철기시개      //라임색
+            imageSrc[3] = "{{ ASSETS_ROOT }}/img/illustrations/red-marker.png";     //고구려       //빨강색
+            imageSrc[4] = "{{ ASSETS_ROOT }}/img/illustrations/brown-marker.png";  //백제        //주황색
+            imageSrc[5] = "{{ ASSETS_ROOT }}/img/illustrations/blue-marker.png";    //신라        /파랑색
+            imageSrc[6] = "{{ ASSETS_ROOT }}/img/illustrations/magenta-marker.png"; //가야        //마젠타색
+            imageSrc[7] = "{{ ASSETS_ROOT }}/img/illustrations/caribbean-blue-marker.png";  //통일신라  //캐리비안 블루색
+            imageSrc[8] = "{{ ASSETS_ROOT }}/img/illustrations/yellow-marker.png";  //고려        //노랑색
+            imageSrc[9] = "{{ ASSETS_ROOT }}/img/illustrations/purple-marker.png";  //조선        //보라색
+            imageSrc[10] = "{{ ASSETS_ROOT }}/img/illustrations/emerald-blue-marker.png";  //대한제국     //에메랄드 블루색
+            imageSrc[11] = "{{ ASSETS_ROOT }}/img/illustrations/japan-marker.png";  //일제강점기   //일본국기 마크
+
+            var imageSize = [];
+            imageSize[0] = new kakao.maps.Size(40,40);  //마커 이미지 크기 지정
+            imageSize[1] = new kakao.maps.Size(40,40);
+            imageSize[2] = new kakao.maps.Size(40,40);
+            imageSize[3] = new kakao.maps.Size(40,40);
+            imageSize[4] = new kakao.maps.Size(40,40);
+            imageSize[5] = new kakao.maps.Size(40,40);
+            imageSize[6] = new kakao.maps.Size(40,40);
+            imageSize[7] = new kakao.maps.Size(40,40);
+            imageSize[8] = new kakao.maps.Size(40,40);
+            imageSize[9] = new kakao.maps.Size(40,40);
+            imageSize[10] = new kakao.maps.Size(40,40);
+            imageSize[11] = new kakao.maps.Size(40,40);
+
+            var imageOption = [];
+            imageOption[0] = {offset : new kakao.maps.Point(20,40)};    //마커이미지의 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정함.(아래 뾰족한 모양 끝)
+            imageOption[1] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[2] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[3] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[4] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[5] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[6] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[7] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[8] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[9] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[10] = {offset : new kakao.maps.Point(20,40)};
+            imageOption[11] = {offset : new kakao.maps.Point(20,40)};
+
+            var markerImage = new Array(imageSrc.length);   //빈 마커이미지 객체배열 생성
+
+            for(var i = 0; i<markerImage.length; i++){
+                markerImage[i] = new kakao.maps.MarkerImage(imageSrc[i], imageSize[i], imageOption[i]); //마커의 이미지 정보를 가지고 있는 마커 이미지를 생성 //마커이미지 객체 생성
+            }
+            //sdh1 끝
+
+            var markers = $(obj_list).map(function(i, data) {   //detail_list내용으로 반복문을 돌리는데 i번째 데이터를 data 변수에 담아서 처리하는 듯 함.
                 var marker = new kakao.maps.Marker({
                     position: new kakao.maps.LatLng(data.latitude, data.longitude),
                     clickable: true
                 });
+
+                //sdh2 시작
+                switch(data.ccbaPcd1Nm){    //마커 설정
+                    case '석기':
+                        marker.setImage(markerImage[0])
+                        break;
+                    case '청동기':
+                        marker.setImage(markerImage[1])
+                        break;
+                    case '철기':
+                        marker.setImage(markerImage[2])
+                        break;
+                    case '고구려':
+                        marker.setImage(markerImage[3])
+                        break;
+                    case '백제':
+                        marker.setImage(markerImage[4])
+                        break;
+                    case '신라':
+                        marker.setImage(markerImage[5])
+                        break;
+                    case '가야':
+                        marker.setImage(markerImage[6])
+                        break;
+                    case '통일신라':
+                        marker.setImage(markerImage[7])
+                        break;
+                    case '고려':
+                        marker.setImage(markerImage[8])
+                        break;
+                    case '조선':
+                        marker.setImage(markerImage[9])
+                        break;
+                    case '대한제국':
+                        marker.setImage(markerImage[10])
+                        break;
+                    case '일제강점기':
+                        marker.setImage(markerImage[11])
+                        break;
+                }
+                //sdh2 끝
 
                 var content = '<div class=info-window onclick=closeOverlay()">'
                                 + '<div class="row align-items-center">'
