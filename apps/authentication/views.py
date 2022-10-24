@@ -56,3 +56,11 @@ def register_user(request):
 
 def policy(request):
     return render(request, "accounts/policy.html")
+
+
+def policy_check(request):
+    return render(request, "accounts/policy-check.html")
+
+
+def newPw(request):
+    return render(request, "accounts/newPw.html")
