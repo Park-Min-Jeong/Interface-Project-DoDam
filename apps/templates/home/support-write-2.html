@@ -2,16 +2,7 @@
 
 {% block title %} 문의 작성 {% endblock %}
 
-{% block stylesheets %}
-    <style>
-        .supportForm {
-            border-style:none;
-            border-color:Transparent;
-            overflow:auto;
-            width:100%;
-        }
-    </style>
-{% endblock stylesheets %}
+{% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
@@ -45,16 +36,10 @@
                 {% endif %}
             {% else %}
                 <div class="container">
-                    <form method="post" action="{% url 'supportWrite' %}">
+                    <form method="post" action="{% url 'supportWrite' %}" style="margin-left:20%; margin-right:20%">
                         {% csrf_token %}
-                        <div class="card shadow">
-                            <div class="card-header bg-white">
-                                <input class="supportForm" type="text" name="title"  placeholder="제목">
-                            </div>
-                            <div class="card-body">
-                                <textarea class="supportForm" name="content"  rows="10" placeholder="내용"></textarea>
-                            </div>
-                        </div>
+                        <input type="text" name="title"  placeholder="제목" style="width:100%"><br>
+                        <textarea style="margin-top:5px; width:100%" name="content"  rows="10" placeholder="내용"></textarea> <!--cols 속성을 지우고 style="width:100%"로 지정했음--> <!--https://sir.kr/qa/103896 참고했음.-->
                         <br>
                         <div align="right">
                             <button class="btn btn-primary" onclick="cancelWrite()"><span class="fas fa-backspace me-2"></span>취소</button>

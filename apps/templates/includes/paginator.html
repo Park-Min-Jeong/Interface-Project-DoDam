@@ -2,7 +2,7 @@
                     <ul class="pagination justify-content-center my-4">
                         {% if page_obj.has_previous %}
                             <li class="page-item">
-                                <a class="page-link" aria-label="first link" href="?page=1">
+                                <a class="page-link" aria-label="first link" href="?page=1{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}">
                                     <span class="fas fa-angle-double-left"></span>
                                 </a>
                             </li>
@@ -17,18 +17,18 @@
                         {% for index in page_list %}
                             {% if index == page_obj.number %}
                                 <li class="page-item active">
-                                    <a class="page-link" href="?page={{ index }}">{{ index }}</a>
+                                    <a class="page-link" href="?page={{ index }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}">{{ index }}</a>
                                 </li>
                             {% else %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ index }}">{{ index }}</a>
+                                    <a class="page-link" href="?page={{ index }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}">{{ index }}</a>
                                 </li>
                             {% endif %}
                         {% endfor %}
 
                         {% if page_obj.has_next %}
                             <li class="page-item">
-                                <a class="page-link" aria-label="end link" href="?page={{ page_obj.paginator.num_pages }}">
+                                <a class="page-link" aria-label="end link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}">
                                     <span class="fas fa-angle-double-right"></span>
                                 </a>
                             </li>

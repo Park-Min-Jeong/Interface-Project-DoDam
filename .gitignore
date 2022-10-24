@@ -33,4 +33,4 @@ apps/static/assets/.temp
 # PyCharm
 .idea/
 apps/home/test.py
-/apps/templates/includes/kakaomap.html
+apps/templates/includes/kakaomap.html
