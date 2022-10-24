@@ -150,6 +150,7 @@ def route_write_search(request):
 
 
 
+
 def search(request):
     obj_dict = dict()
     for Pcd1 in ["석기", "청동기", "철기", "고구려", "백제", "신라", "가야", "통일신라",
@@ -177,6 +178,7 @@ def search(request):
         return JsonResponse(result_dict, json_dumps_params={"ensure_ascii": False})
     else:
         return render(request, "home/search-2.html")
+
 
 
 # def pages(request):
