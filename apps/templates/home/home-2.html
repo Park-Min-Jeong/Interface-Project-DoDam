@@ -2,7 +2,16 @@
 
 {% block title %} 홈 {% endblock %}
 
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <style>
+        .profile {
+            width:50%;
+            aspect-ratio:1/1;
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -65,16 +74,16 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="card shadow">
-                            <img src="{{ ASSETS_ROOT }}/img/blog/image-1.jpg" class="card-img-top rounded-top" style="aspect-ratio: 1/1">
+                        <div class="card border-0 p-3">
+                            <img src="{{ ASSETS_ROOT }}/img/team/profile-picture-1.jpg" class="card-img rounded-circle profile">
                             <div class="card-body text-center">
                                 <h3 class="h5 card-title mt-3">박민정</h3>
                                 <p class="card-text">간단한 자기 소개</p>
                                 <div class="btn-group">
-                                    <button class="btn btn-primary btn-icon-only" onclick="location.href='https://github.com/Park-Min-Jeong'">
+                                    <button class="btn btn-primary btn-icon-only" onclick="https://github.com/Park-Min-Jeong">
                                         <span class="fab fa-github"></span>
                                     </button>
-                                    <button class="btn btn-primary btn-icon-only" onclick="mailto:minwjd1028@g.skku.edu">
+                                    <button class="btn btn-primary btn-icon-only" onclick="mailto:minwjd1028@naver.com">
                                         <span class="fas fa-envelope-open"></span>
                                     </button>
                                 </div>
@@ -82,8 +91,8 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="card shadow">
-                            <img src="{{ ASSETS_ROOT }}/img/blog/image-1.jpg" class="card-img-top rounded-top" style="aspect-ratio: 1/1">
+                        <div class="card border-0 p-3">
+                            <img src="{{ ASSETS_ROOT }}/img/team/profile-picture-2.jpg" class="card-img rounded-circle profile">
                             <div class="card-body text-center">
                                 <h3 class="h5 card-title mt-3">박수은</h3>
                                 <p class="card-text">간단한 자기 소개</p>
@@ -99,8 +108,8 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="card shadow">
-                            <img src="{{ ASSETS_ROOT }}/img/blog/image-1.jpg" class="card-img-top rounded-top" style="aspect-ratio: 1/1">
+                        <div class="card border-0 p-3">
+                            <img src="{{ ASSETS_ROOT }}/img/team/profile-picture-3.jpg" class="card-img rounded-circle profile">
                             <div class="card-body text-center">
                                 <h3 class="h5 card-title mt-3">서대훈</h3>
                                 <p class="card-text">간단한 자기 소개</p>
