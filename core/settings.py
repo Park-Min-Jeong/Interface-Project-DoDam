@@ -173,3 +173,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 AUTH_USER_MODEL = "auth.User"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
