@@ -143,6 +143,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
 )
+
 ACCOUNT_SESSION_REMEMBER = True
 SESSION_COOKIE_AGE = 3600 #쿠키를 한시간만 저장
 #사용자가 직접 로그아웃 버튼을 클릭해 로그아웃을 할 경우에는 서버에 저장된 Session도 삭제되지만 유효시간이 만료된 cookie의 경우에는 서버에
