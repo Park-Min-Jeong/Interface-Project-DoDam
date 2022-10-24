@@ -49,36 +49,20 @@
                                 <h3 class="text-primary mt-auto mb-auto">시대</h3>
                             </div>
                             <div class="card-body">
-                                <div class="form-check"> <!-- 마커 색에 맞게 글자 색상 변경-sdh --> <!-- <span style = "white-space: pre;">&#9;</span>는 탭키 역할. http://triki.net/prgm/2968-->
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="selectall" onclick="selectAll(this)"><b>전체 </b><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="0" onclick="checkSelectAll(this)">석기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:gray"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="1" onclick="checkSelectAll(this)">청동기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#008000"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="2" onclick="checkSelectAll(this)">철기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#00ff00"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="3" onclick="checkSelectAll(this)">고구려<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#ff0000"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="4" onclick="checkSelectAll(this)">백제<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#964b00"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="5" onclick="checkSelectAll(this)">신라<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#0000ff"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="6" onclick="checkSelectAll(this)">가야<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#ff00ff"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="7" onclick="checkSelectAll(this)">통일신라<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:#44c0fb"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="8" onclick="checkSelectAll(this)">고려<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#e6e600"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="9" onclick="checkSelectAll(this)">조선<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#800080"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="10" onclick="checkSelectAll(this)">대한제국<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:#40e0d0"></span><br>
-                                    <input class="form-check-input" type="checkbox" name="heritage" value="11" onclick="checkSelectAll(this)">일제강점기<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:red; background-color:#cccccc"></span><br>
-                                    <input class="btn btn-sm btn-primary" type="button" name="initCheckboxBtn" value="초기화" onclick="initCheckbox()">
-                                </div>
-                                <div class="form-check text-left">
-                                        {% csrf_token %}
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="석기">석기<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="청동기">청동기<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="철기">철기<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="고구려">고구려<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="백제">백제<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="신라">신라<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="가야">가야<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="통일신라">통일신라<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="고려">고려<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="조선">조선<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="대한제국">대한제국<br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="일제강점기">일제강점기<br>
+                                <div class="form-check text-left"> <!-- 마커 색에 맞게 글자 색상 변경-sdh --> <!-- <span style = "white-space: pre;">&#9;</span>는 탭키 역할. http://triki.net/prgm/2968-->
+                                        {% csrf_token %}    <!--script에서 $.ajax() 함수에서 체크한 것을 POST로 보냄. 그래서 이 구문이 필요함.-->
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="석기">석기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:gray"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="청동기">청동기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#008000"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="철기">철기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#00ff00"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="고구려">고구려<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#ff0000"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="백제">백제<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#964b00"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="신라">신라<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#0000ff"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="가야">가야<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#ff00ff"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="통일신라">통일신라<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:#44c0fb"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="고려">고려<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#e6e600"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="조선">조선<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#800080"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="대한제국">대한제국<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:#40e0d0"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="일제강점기">일제강점기<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:red; background-color:#cccccc"></span><br>
                                     </div>
                                     <div class="d-flex justify-content-between mt-4">
                                         <button class="btn btn-sm btn-primary" value="selectAll"><span class="fas fa-check-double"></span></button>
@@ -126,7 +110,33 @@
         });
 
 
-        //sdh1 시작
+
+
+
+        $.ajax({
+            type: "POST",   //체크한 것을 POST 방식으로 보냄.
+            async: false,
+            url: "{% url 'search' %}",
+            dataType: "json",
+            data: {pcd1_list: JSON.stringify(checked_value)}  ,
+            success: function(data) {
+                obj_list = data;
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        return obj_list;
+    }
+
+    function addMarkerClusterer() {
+        var checked_value = [];
+
+        $("input:checkbox[name=heritage]:checked").each(function(i, box) {
+            checked_value.push($(box).val());
+        });
+
+                //sdh1 시작
         /* //연습용 코드(삭제X)
         var imageSrc = "{{ ASSETS_ROOT }}/img/illustrations/stone_age_house.png", //마커 이미지 주소
             imageSize = new kakao.maps.Size(45,42), //마커 이미지 크기
@@ -191,116 +201,57 @@
         }
         //sdh1 끝
 
-
-        $(function() {
-        $.ajax({
-            type: "POST",
-            async: false,
-            url: "{% url 'search' %}",
-            dataType: "json",
-            data: {pcd1_list: JSON.stringify(checked_value)}  ,
-            success: function(data) {
-                obj_list = data;
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-        return obj_list;
-    }
-
-    function addMarkerClusterer() {
-        var checked_value = [];
-
-        $("input:checkbox[name=heritage]:checked").each(function(i, box) {
-            checked_value.push($(box).val());
-        });
-
         if (checked_value.length > 0) {
             obj_list = ajax_load_data(checked_value);
             clusterer.clear();
 
-                    $.each(checked_value, function(i, value) {
-                        var detail_list = {{ obj_list|safe }}[value];
-                        var markers = $(detail_list).map(function(i, data) {    //detail_list내용으로 반복문을 돌리는데 i번째 데이터를 data 변수에 담아서 처리하는 듯 함.
-                            var marker = new kakao.maps.Marker({
-                                position: new kakao.maps.LatLng(data.latitude, data.longitude),
-                                clickable: true
-                            });
-
-                            //sdh2 시작
-                            switch(data.ccbaPcd1Nm){    //마커 설정
-                                case '석기':
-                                    marker.setImage(markerImage[0])
-                                    break;
-                                case '청동기':
-                                    marker.setImage(markerImage[1])
-                                    break;
-                                case '철기':
-                                    marker.setImage(markerImage[2])
-                                    break;
-                                case '고구려':
-                                    marker.setImage(markerImage[3])
-                                    break;
-                                case '백제':
-                                    marker.setImage(markerImage[4])
-                                    break;
-                                case '신라':
-                                    marker.setImage(markerImage[5])
-                                    break;
-                                case '가야':
-                                    marker.setImage(markerImage[6])
-                                    break;
-                                case '통일신라':
-                                    marker.setImage(markerImage[7])
-                                    break;
-                                case '고려':
-                                    marker.setImage(markerImage[8])
-                                    break;
-                                case '조선':
-                                    marker.setImage(markerImage[9])
-                                    break;
-                                case '대한제국':
-                                    marker.setImage(markerImage[10])
-                                    break;
-                                case '일제강점기':
-                                    marker.setImage(markerImage[11])
-                                    break;
-                            }
-                            //sdh2 끝
-
-                            var content = '<div class=info-window">'
-                                                + '<div class="row align-items-center">'
-                                                    + '<div class="col-4">'
-                                                        + '<img class="info-image" src=' + data.imageUrl +'>'
-                                                    + '</div>'
-                                                    + '<div class="col-8">'
-                                                        + '<p class="info-text">'+ data.ccbaMnm1
-                                                        + '<br>' + data.ccbaPcd1Nm + ' | ' + data.ccbaCtcdNm
-                                                        + '<br>' + data.ccmaName + ' ' + data.crltsnoNm  + '호' +'</p>'
-                                                    + '</div>'
-                                                + '</div>'
-                                            + '</div>';
-
-                            var infowindow = new kakao.maps.InfoWindow({
-                                content: content
-                            });
-                            kakao.maps.event.addListener(marker, "mouseover", function() {
-                                infowindow.open(map, marker);
-                            });
-                            kakao.maps.event.addListener(marker, "mouseout", function() {
-                                infowindow.close();
-                            });
-
-                            return marker;
-                        });
-                        clusterer.addMarkers(markers);
             for (var key in obj_list) {
                 var markers = $(obj_list[key]).map(function(i, data) {
                     var marker = new kakao.maps.Marker({
                         position: new kakao.maps.LatLng(data.latitude, data.longitude),
                         clickable: true
                     });
+
+                    //sdh2 시작
+                    switch(data.ccbaPcd1Nm){    //마커 설정
+                        case '석기':
+                            marker.setImage(markerImage[0]);
+                            break;
+                        case '청동기':
+                            marker.setImage(markerImage[1]);
+                            break;
+                        case '철기':
+                            marker.setImage(markerImage[2]);
+                            break;
+                        case '고구려':
+                            marker.setImage(markerImage[3]);
+                            break;
+                        case '백제':
+                            marker.setImage(markerImage[4]);
+                            break;
+                        case '신라':
+                            marker.setImage(markerImage[5]);
+                            break;
+                        case '가야':
+                            marker.setImage(markerImage[6]);
+                            break;
+                        case '통일신라':
+                            marker.setImage(markerImage[7]);
+                            break;
+                        case '고려':
+                            marker.setImage(markerImage[8]);
+                            break;
+                        case '조선':
+                            marker.setImage(markerImage[9]);
+                            break;
+                        case '대한제국':
+                            marker.setImage(markerImage[10]);
+                            break;
+                        case '일제강점기':
+                            marker.setImage(markerImage[11]);
+                            break;
+                    }
+                            //sdh2 끝
                     var content = '<div class=info-window">'
                         + '<div class="row align-items-center">'
                             + '<div class="col-4">'
@@ -333,7 +284,7 @@
     }
 
 
-    $("input:checkbox[name=heritage]").on("click", addMarkerClusterer);
+    $("input:checkbox[name=heritage]").on("click", addMarkerClusterer); //체크박스에서 onclick 함수를 대체함
 
     $("button[value='initCheckbox']").on("click", function() {
         $("input:checkbox[name=heritage]").prop("checked", false);
