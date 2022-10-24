@@ -1,0 +1,41 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} 저작권 {% endblock %}
+
+{% block stylesheets %}
+    <style>
+        h5 {
+            font-weight: bold;
+        }
+        p {
+            margin: 10px;
+            font-size: small;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+<main>
+    <section class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark" data-background="{{ ASSETS_ROOT }}/img/pages/form-image.jpg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
+                    <div class="text-center">
+                        <h1>역사 도담 저작권 이용 현황</h1>
+                    </div>
+                    <hr>
+                    <div class="text-left">
+                        <h5>부트스트랩 템플릿</h5>
+                        <p>내용</p>
+                        <h5>제목</h5>
+                        <p>내용</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

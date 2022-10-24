@@ -173,8 +173,8 @@
         }
     }
 
+$("input:checkbox[name=heritage]").on("click", addMarkerClusterer);
 
-    $("input:checkbox[name=heritage]").on("click", addMarkerClusterer);
 
     $("button[value='initCheckbox']").on("click", function() {
         $("input:checkbox[name=heritage]").prop("checked", false);

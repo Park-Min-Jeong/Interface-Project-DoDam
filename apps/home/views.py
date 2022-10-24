@@ -47,9 +47,7 @@ def support_write(request):
 
         context = {"message": message, "success": success}
 
-    # support-write와 support-write-2 스타일 차이
-    return render(request, "home/support-write-2.html", context)
-    # return render(request, "home/support-write.html", context)
+    return render(request, "home/support-write.html", context)
 
 
 def support_view(request, id): #forthapp\views.py의 u()와 r() 참고
@@ -182,4 +180,7 @@ def search(request):
         return JsonResponse(result_dict, json_dumps_params={"ensure_ascii": False})
     else:
         return render(request, "home/search.html")
-        # return render(request, "home/search-2.html")
+
+
+def copyright(request):
+    return render(request, "home/copyright.html")

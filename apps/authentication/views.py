@@ -32,6 +32,7 @@ def change_password(request):
         'form': form
     })
 
+
 def login_view(request):
     form = LoginForm(request.POST or None)
 
@@ -77,5 +78,10 @@ def register_user(request):
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
 
+
 def policy(request):
     return render(request, "accounts/policy.html")
+
+
+def policy_check(request):
+    return render(request, "accounts/policy-check.html")

@@ -5,16 +5,26 @@
                 <p class="text-white fw-bold footer-logo-text m-0">역사도담 | Trinity</p>
             </div>
             <ul class="documents mb-0 mb-lg-0" >
-                <li><a href="{% url 'policy' %}" class="mx-3" target="_blank">이용약관</a></li>
-                <li><a href="{% url 'policy' %}" class="mx-3" target="_blank">저작권</a></li>
+                <script>
+                    function openPolicy() {
+                        var popup = window.open("{% url 'policy' %}", "policy",
+                                                "width=700px, height=800px, resizable=no, scrollbars=yes");
+                    }
+                    function openCopyright() {
+                        var popup = window.open("{% url 'copyright' %}", "copyright",
+                                                "width=700px, height=800px, resizable=no, scrollbars=yes");
+                    }
+                </script>
+                <li class="mx-3 text-underline" onclick="openPolicy()">이용약관</li>
+                <li class="mx-3 text-underline" onclick="openCopyright()">저작권</li>
             </ul>
             <ul class="social-buttons mb-0 mb-lg-0">
                 <li><a href="https://github.com/Park-Min-Jeong" aria-label="github social link" class="icon-white me-2"><span class="fab fa-github"></span></a></li>
                 <li><a href="https://github.com/sooeun99" aria-label="github social link" class="icon-white me-2"><span class="fab fa-github"></span></a></li>
                 <li><a href="https://github.com/dae-hunseo" aria-label="github social link" class="icon-white me-2"><span class="fab fa-github"></span</a></li>
             </ul>
-            <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                <p class="fw-normal font-small mb-0"><a href="https://themesberg.com/" target="_blank">&copy; Themesberg - coded by AppSeed.</a></p>
+            <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo"><span class="fw-normal">
+                <p class="fw-normal font-small mb-0">&copy; Themesberg - coded by <a href="https://appseed.us" target="_blank" class="fw-bold text-underline">AppSeed</a></p>
             </div>
         </div>
     </footer>

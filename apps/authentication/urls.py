@@ -12,4 +12,5 @@ urlpatterns = [
     path("register/", register_user, name="register"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("policy/", policy, name="policy"),
+    path("policyCheck/", policy_check, name="policyCheck"),
 ]
