@@ -153,3 +153,5 @@ SESSION_COOKIE_AGE = 3600 #쿠키를 한시간만 저장
 
 
 AUTH_USER_MODEL = "auth.User"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
