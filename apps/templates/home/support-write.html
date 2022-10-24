@@ -73,7 +73,7 @@
 <script>
     function cancelWrite() {
         document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault();
+            event.preventDefault(); //POST에서는 어떤 상황에서도 POST가 수행이 된다. 그런데 취소 버튼 누를때 POST가 수행이 안 되어야 해서 이 함수를 호출함. 이게 없으면 취소 버튼 눌렀을때 bulletin으로 돌아가지 않고 "잘못된 입력입니다"가 뜬다.
         });
         location.href = "{% url 'supportBulletin' %}";
     };
