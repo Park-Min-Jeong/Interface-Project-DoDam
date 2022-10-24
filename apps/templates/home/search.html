@@ -49,20 +49,20 @@
                                 <h3 class="text-primary mt-auto mb-auto">시대</h3>
                             </div>
                             <div class="card-body">
-                                <div class="form-check text-left"> <!-- 마커 색에 맞게 글자 색상 변경-sdh --> <!-- <span style = "white-space: pre;">&#9;</span>는 탭키 역할. http://triki.net/prgm/2968-->
+                                <div class="form-check text-left"> <!-- 마커 색에 맞게 글자 색상 변경-sdh --> 
                                         {% csrf_token %}    <!--script에서 $.ajax() 함수에서 체크한 것을 POST로 보냄. 그래서 이 구문이 필요함.-->
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="석기">석기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:gray"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="청동기">청동기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#008000"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="철기">철기<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#00ff00"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="고구려">고구려<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#ff0000"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="백제">백제<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#964b00"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="신라">신라<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#0000ff"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="가야">가야<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#ff00ff"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="통일신라">통일신라<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:#44c0fb"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="고려">고려<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#e6e600"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="조선">조선<span style = "white-space: pre;">&#9;&#9;</span><span class="fas fa-check" style="color:#800080"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="대한제국">대한제국<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:#40e0d0"></span><br>
-                                        <input class="form-check-input" type="checkbox" name="heritage" value="일제강점기">일제강점기<span style = "white-space: pre;">&#9;</span><span class="fas fa-check" style="color:red; background-color:#cccccc"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="석기">석기<span class="fas fa-check" style="color:gray; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="청동기">청동기</span><span class="fas fa-check" style="color:#008000; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="철기">철기<span class="fas fa-check" style="color:#00ff00; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="고구려">고구려<span class="fas fa-check" style="color:#ff0000; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="백제">백제<span class="fas fa-check" style="color:#964b00; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="신라">신라<span class="fas fa-check" style="color:#0000ff; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="가야">가야<span class="fas fa-check" style="color:#ff00ff; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="통일신라">통일신라<span class="fas fa-check" style="color:#44c0fb; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="고려">고려<span class="fas fa-check" style="color:#e6e600; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="조선">조선<span class="fas fa-check" style="color:#800080; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="대한제국">대한제국<span class="fas fa-check" style="color:#40e0d0; float:right; margin-right: 2em;"></span><br>
+                                        <input class="form-check-input" type="checkbox" name="heritage" value="일제강점기">일제강점기<span class="fas fa-check" style="color:red; background-color:#cccccc; float:right; margin-right: 2em;"></span><br>
                                     </div>
                                     <div class="d-flex justify-content-between mt-4">
                                         <button class="btn btn-sm btn-primary" value="selectAll"><span class="fas fa-check-double"></span></button>
