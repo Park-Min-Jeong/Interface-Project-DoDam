@@ -11,11 +11,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import json
 
-def index(request):
-    context = {'segment': 'index'}
 
-    html_template = loader.get_template('home/home.html')
-    return HttpResponse(html_template.render(context, request))
+def index(request):
+    return render(request, "home/home-2.html")
 
 
 def support_bulletin(request):

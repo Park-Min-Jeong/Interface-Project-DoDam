@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} 홈 {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="fw-bolder display-2">역사 도담</h1>
+                        <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
+                            시대별 문화재 지도
+                            <p>대한민국의 아름다운 문화재로 도담한 역사여행 다녀오세요!</p>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="fill-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                    <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+            </svg></figure>
+        </section>
+
+        <section class="section section-lg">
+            <div class="container" >
+                <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+                    <div class="col-12 col-lg-5 mb-5 mb-lg-0 order-lg-2">
+                        <h2 class="h1">문화재 검색</h2>
+                        <p class="mb-4 lead">시대별 문화재를 지도로 볼 수 있습니다.</p>
+                        <p class="mb-4">원하는 시대를 클릭하여 지도에 표시할 수 있습니다. 마커에 커서를 올리면 해당 문화재의 정보도 확인할 수 있습니다.(이미지는 완성 후 수정)</p>
+                        <button class="btn btn-outline-primary" onclick="location.href='{% url 'search' %}'">
+                            <span class="fas fa-search me-2"></span>문화재 검색</button>
+                    </div>
+                    <div class="col-12 col-lg-6 order-lg-1">
+                        <img src="{{ ASSETS_ROOT }}/img/home/example1.png">
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <h2 class="h1 d-flex align-items-center">탐방 경로</h2>
+                        <p class="mb-4 lead">문화재 탐방 경로를 지도로 볼 수 있습니다.</p>
+                        <p class="mb-4">탐방한 순서대로 지도에 화살표로 표시되어 있습니다. 지도에 표기된 마커를 클릭하면 해당 문화재의 정보도 확인할 수 있습니다.(이미지는 완성 후 수정)</p>
+                        <button class="btn btn-outline-primary" onclick="location.href='{% url 'routeBulletin' %}'">
+                            <span class="fas fa-map-marked-alt me-2"></span>탐방 경로</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="{{ ASSETS_ROOT }}/img/home/example2.png">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg">
+            <div class="container">
+                <div class="row justify-content-center mb-5">
+                    <h2 class="text-center">팀 소개</h2>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="card shadow">
+                            <img src="{{ ASSETS_ROOT }}/img/blog/image-1.jpg" class="card-img-top rounded-top" style="aspect-ratio: 1/1">
+                            <div class="card-body text-center">
+                                <h3 class="h5 card-title mt-3">박민정</h3>
+                                <p class="card-text">간단한 자기 소개</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-icon-only" onclick="location.href='https://github.com/Park-Min-Jeong'">
+                                        <span class="fab fa-github"></span>
+                                    </button>
+                                    <button class="btn btn-primary btn-icon-only" onclick="mailto:minwjd1028@g.skku.edu">
+                                        <span class="fas fa-envelope-open"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="card shadow">
+                            <img src="{{ ASSETS_ROOT }}/img/blog/image-1.jpg" class="card-img-top rounded-top" style="aspect-ratio: 1/1">
+                            <div class="card-body text-center">
+                                <h3 class="h5 card-title mt-3">박수은</h3>
+                                <p class="card-text">간단한 자기 소개</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-icon-only" onclick="https://github.com/sooeun99">
+                                        <span class="fab fa-github"></span>
+                                    </button>
+                                    <button class="btn btn-primary btn-icon-only" onclick="mailto:ppi06105@naver.com">
+                                        <span class="fas fa-envelope-open"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="card shadow">
+                            <img src="{{ ASSETS_ROOT }}/img/blog/image-1.jpg" class="card-img-top rounded-top" style="aspect-ratio: 1/1">
+                            <div class="card-body text-center">
+                                <h3 class="h5 card-title mt-3">서대훈</h3>
+                                <p class="card-text">간단한 자기 소개</p>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-icon-only" onclick="https://github.com/dae-hunseo">
+                                        <span class="fab fa-github"></span>
+                                    </button>
+                                    <button class="btn btn-primary btn-icon-only" onclick="mailto:0420sdh@naver.com">
+                                        <span class="fas fa-envelope-open"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+{% endblock javascripts %}
