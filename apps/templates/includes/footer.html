@@ -1,33 +1,20 @@
     <footer class="footer pt-6 pb-5 bg-dark text-white text-center">
-        <hr class="bg-secondary my-3 my-lg-5">
-            <div class="row">
-                <div class="col mb-md-0">
-                    <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center mb-3">
-                        <img src="{{ ASSETS_ROOT }}/img/themesberg.svg" height="30" class="me-2" alt="Themesberg Logo">
-                        <p class="text-white fw-bold footer-logo-text m-0">역사도담 | Trinity</p>
-                        <ul class="social-buttons mb-0 mb-lg-0">
-                            <li>
-                            <a href="https://github.com/Park-Min-Jeong" aria-label="github social link" class="icon-white me-2">
-                                <span class="fab fa-github"></span>
-                            </a>
-                            </li>
-                            <li>
-                            <a href="https://github.com/sooeun99" aria-label="github social link" class="icon-white me-2">
-                                <span class="fab fa-github"></span>
-                            </a>
-                            </li>
-                            <li>
-                            <a href="https://github.com/dae-hunseo" aria-label="github social link" class="icon-white me-2">
-                                <span class="fab fa-github"></span>
-                            </a>
-                            </li>
-                        </ul>
-                    </a>
-                    <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                        <p class="fw-normal font-small mb-0">
-                            &copy; Themesberg - coded by AppSeed.
-                        </p>
-                    </div>
-                </div>
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center mb-3">
+                <img class="navbar-brand-light me-2" src="{{ ASSETS_ROOT }}/img/brand/light.svg" alt="Logo dark" height="30">
+                <p class="text-white fw-bold footer-logo-text m-0">역사도담 | Trinity</p>
             </div>
+            <ul class="documents mb-0 mb-lg-0" >
+                <li><a href="{% url 'policy' %}" class="mx-3" target="_blank">이용약관</a></li>
+                <li><a href="{% url 'policy' %}" class="mx-3" target="_blank">저작권</a></li>
+            </ul>
+            <ul class="social-buttons mb-0 mb-lg-0">
+                <li><a href="https://github.com/Park-Min-Jeong" aria-label="github social link" class="icon-white me-2"><span class="fab fa-github"></span></a></li>
+                <li><a href="https://github.com/sooeun99" aria-label="github social link" class="icon-white me-2"><span class="fab fa-github"></span></a></li>
+                <li><a href="https://github.com/dae-hunseo" aria-label="github social link" class="icon-white me-2"><span class="fab fa-github"></span</a></li>
+            </ul>
+            <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
+                <p class="fw-normal font-small mb-0"><a href="https://themesberg.com/" target="_blank">&copy; Themesberg - coded by AppSeed.</a></p>
+            </div>
+        </div>
     </footer>
