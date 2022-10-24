@@ -13,7 +13,7 @@ import json
 
 
 def index(request):
-    return render(request, "home/home-2.html")
+    return render(request, "home/home.html")
 
 
 def support_bulletin(request):
