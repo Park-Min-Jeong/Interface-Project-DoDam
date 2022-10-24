@@ -28,7 +28,7 @@
 
                             {% if not success %}
 
-                                <form name="frm" method="post" action="UserServlet" onSubmit="return Checkform()">
+                                <form name="frm" method="post" action="" onSubmit="return Checkform()">
 
                                     {% csrf_token %}
 
@@ -118,7 +118,7 @@
 <script>
 function Checkform() {
     if(frm.confirm.checked != true){
-        alert("약관동의에 동의해주세요.");
+        alert("이용약관에 동의해주세요.");
         frm.confirm.focus();
 
         return false;
