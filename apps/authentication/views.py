@@ -8,17 +8,6 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
 from django.conf import settings
 
-#sooeun
-from django.core.mail.message import EmailMessage
-
-
-def send_email(request):
-    subject = 'message'
-    to = ["minwjd1028@g.skku.edu"]
-    from_email = 'dodamtrinity@gmail.com'
-    message = '메세지 테스트'
-    EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
-
 
 def login_view(request):
     form = LoginForm(request.POST or None)

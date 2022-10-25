@@ -19,7 +19,6 @@ urlpatterns = [
     path("policy/", policy, name="policy"),
     path("policyCheck/", policy_check, name="policyCheck"),
     path("newPw/", newPw, name="newPw"),
-    path("send_email/", views.send_email, name='send_email'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name="password_reset"),
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
     path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
