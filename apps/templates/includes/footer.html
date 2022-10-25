@@ -1,22 +1,23 @@
+    <script>
+        function openPolicy() {
+            var popup = window.open("{% url 'policy' %}", "policy",
+                                    "width=700px, height=800px, resizable=no, scrollbars=yes");
+        }
+        function openCopyright() {
+            var popup = window.open("{% url 'copyright' %}", "copyright",
+                                    "width=700px, height=800px, resizable=no, scrollbars=yes");
+        }
+    </script>
     <footer class="footer pt-6 pb-5 bg-dark text-white text-center">
         <div class="row justify-content-center">
             <div class="d-flex justify-content-center mb-3">
-                <img class="navbar-brand-light me-2" src="{{ ASSETS_ROOT }}/img/brand/light.svg" alt="Logo dark" height="30">
+                <a href="{% url 'home' %}"><img class="navbar-brand-light me-2" src="{{ ASSETS_ROOT }}/img/brand/light.svg" alt="Logo dark" height="30"></a>
                 <p class="text-white fw-bold footer-logo-text m-0">역사도담 | Trinity</p>
             </div>
             <ul class="documents mb-3">
-                <script>
-                    function openPolicy() {
-                        var popup = window.open("{% url 'policy' %}", "policy",
-                                                "width=700px, height=800px, resizable=no, scrollbars=yes");
-                    }
-                    function openCopyright() {
-                        var popup = window.open("{% url 'copyright' %}", "copyright",
-                                                "width=700px, height=800px, resizable=no, scrollbars=yes");
-                    }
-                </script>
+
                 <li class="mx-3 text-underline" onclick="openPolicy()">이용약관</li>
-                <li class="mx-3 text-underline" onclick="openCopyright()">저작권 이용</li>
+                <li class="mx-3 text-underline" onclick="openCopyright()">저작권 활용</li>
             </ul>
             <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo"><span class="fw-normal">
                 <p class="fw-normal font-small mb-0">&copy; Themesberg - coded by <a href="https://appseed.us" target="_blank" class="fw-bold text-underline">AppSeed</a></p>
