@@ -63,7 +63,7 @@ def register_user(request):
 
 
 def copyright(request):
-    return render(request, "home/copyright.html")
+    return render(request, "accounts/copyright.html")
 
 
 def policy(request):
