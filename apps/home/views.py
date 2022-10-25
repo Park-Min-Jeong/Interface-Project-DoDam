@@ -188,3 +188,5 @@ def search(request):
         return render(request, "home/search.html")
 
 
+def team_introduce(request):
+    return render(request, "home/team-introduce.html")

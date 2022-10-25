@@ -16,4 +16,5 @@ urlpatterns = [
     path("supportBulletin/", views.support_bulletin, name="supportBulletin"),
     path("supportView/<int:id>", views.support_view, name="supportView"),
     path("supportWrite/", views.support_write, name="supportWrite"),
+    path("teamIntroduce/", views.team_introduce, name="teamIntroduce"),
 ]
