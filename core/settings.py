@@ -184,7 +184,6 @@ EMAIL_USE_TLS = True
 # 사이트와 관련한 자동응답을 받을 이메일 주소
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
 AUTH_USER_MODEL = "auth.User"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
