@@ -2,8 +2,8 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+
 from django.http import HttpResponse, JsonResponse
-from django.template import loader
 from django.shortcuts import render
 from .paging import make_pagenator
 from .models import *
@@ -22,6 +22,7 @@ def support_bulletin(request):
     context = {"page_obj":page_obj, "page_list": page_list}
     return render(request, "home/support-bulletin.html", context)
 
+
 @login_required(login_url="/login/")
 def support_write(request):
     context = None
@@ -36,6 +37,7 @@ def support_write(request):
 
             sup = support(title=title, writer=user, question=content, answer=None, answered=0)
             sup.save()
+
         except:
             message = "잘못된 입력입니다."
             success = False
@@ -48,16 +50,18 @@ def support_write(request):
     return render(request, "home/support-write.html", context)
 
 
-def support_view(request, id): #forthapp\views.py의 u()와 r() 참고
-    post = support.objects.get(id=id) #왼쪽 id는 support 테이블의 primary key인 id #오른쪽 id는 주소창의 supportView/뒤에 오는 숫자 값으로 글의 id값을 넘겨받음
+def support_view(request, id):
+    post = support.objects.get(id=id)
     answering = None
-    # if request.POST.get('answerQ'): #'answerQ'에 내용이 있으면 #원래는 support_write()처럼 if request.method == 'POST'가 정석인듯 함. 그래서 바꿨음.
+
     if request.method == 'POST':
-        answering = request.POST.get('answerQ') #답변 작성한 textarea 내용을 얻어옴
-        post.answer = answering #될지 모르고 해본건데 됐음
-        post.answered = 1   #1은 y, 0은 n
-        post.save()         # 저장
+        answering = request.POST.get('answerQ')
+        post.answer = answering
+        post.answered = 1
+        post.save()
+
     context = {"post": post, "answerContent": answering}
+
     return render(request, "home/support-view.html", context)
 
 
@@ -127,6 +131,7 @@ def route_write(request):
 
             message = request.user.username + "님의 게시글이 저장되었습니다."
             success = True
+
         except:
             message = "잘못된 입력입니다."
 
@@ -141,6 +146,7 @@ def route_write_search(request):
 
     if keyword:
         obj_list = heritage.objects.filter(ccbaMnm1__contains=keyword).order_by("ccbaCpno")
+
     else:
         obj_list = heritage.objects.all().order_by("ccbaCpno")
 
@@ -156,6 +162,7 @@ def search(request):
     for Pcd1 in ["석기", "청동기", "철기", "고구려", "백제", "신라", "가야", "통일신라",
                  "고려", "조선", "대한제국", "일제강점기"]:
         obj_dict[Pcd1] = list()
+
         for obj in heritage.objects.filter(ccbaPcd1Nm__exact=Pcd1).all():
             obj_dict[Pcd1].append({
                 "ccbaPcd1Nm": obj.ccbaPcd1Nm,
@@ -170,15 +177,14 @@ def search(request):
 
     if request.method == "POST":
         pcd1_list = json.loads(request.POST.get("pcd1_list"))
-        print(pcd1_list)
         result_dict = dict()
+
         for pcd1 in pcd1_list:
             result_dict[pcd1] = obj_dict[pcd1]
 
         return JsonResponse(result_dict, json_dumps_params={"ensure_ascii": False})
+
     else:
         return render(request, "home/search.html")
 
 
-def copyright(request):
-    return render(request, "home/copyright.html")

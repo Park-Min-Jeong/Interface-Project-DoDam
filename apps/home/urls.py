@@ -2,12 +2,12 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+
 from django.urls import path
 from apps.home import views
 
 urlpatterns = [
     path("", views.index, name="home"),
-    path("copyright/", views.copyright, name="copyright"),
     path("search/", views.search, name="search"),
     path("routeBulletin/", views.route_bulletin, name="routeBulletin"),
     path("routeView/<int:id>/", views.route_view, name="routeView"),

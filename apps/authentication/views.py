@@ -3,7 +3,6 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
@@ -12,12 +11,14 @@ from django.conf import settings
 #sooeun
 from django.core.mail.message import EmailMessage
 
+
 def send_email(request):
     subject = 'message'
     to = ["minwjd1028@g.skku.edu"]
     from_email = 'dodamtrinity@gmail.com'
     message = '메세지 테스트'
     EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -55,7 +56,6 @@ def register_user(request):
 
             msg = "회원가입이 완료되었습니다"
             success = True
-            # return redirect("/login/")
 
         else:
             msg = "입력 형식을 확인하세요"
@@ -63,6 +63,11 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+
+def copyright(request):
+    return render(request, "accounts/copyright.html")
+
 
 def policy(request):
     return render(request, "accounts/policy.html")
