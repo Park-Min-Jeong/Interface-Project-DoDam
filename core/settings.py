@@ -4,6 +4,8 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 import os, environ
+import json
+from django.core.exceptions import ImproperlyConfigured
 
 env = environ.Env(
     # set casting, default value
@@ -14,11 +16,24 @@ env = environ.Env(
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Secrets.json
+secret_file = os.path.join(BASE_DIR, "secrets.json")
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
 # Take environment variables from .env file
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default='S#perS3crEt_007')
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
@@ -157,11 +172,11 @@ EMAIL_PORT = '587'
 
 # 발신할 이메일
 # EMAIL_HOST_USER = '구글아이디@gmail.com'
-EMAIL_HOST_USER = 'dodamtrinity@gmail.com'
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 
 # 발신할 메일의 비밀번호
 # EMAIL_HOST_PASSWORD = '구글비밀번호'
-EMAIL_HOST_PASSWORD = 'dodam1234!'
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
 
 # TLS 보안 방법
 EMAIL_USE_TLS = True

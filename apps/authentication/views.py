@@ -12,7 +12,7 @@ from django.core.mail.message import EmailMessage
 
 def send_email(request):
     subject = 'message'
-    to = ["ppi06105hg@gmail.com"]
+    to = ["minwjd1028@g.skku.edu"]
     from_email = 'dodamtrinity@gmail.com'
     message = '메세지 테스트'
     EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
