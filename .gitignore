@@ -34,3 +34,4 @@ apps/static/assets/.temp
 .idea/
 apps/home/test.py
 apps/templates/includes/kakaomap.html
+/secrets.json
