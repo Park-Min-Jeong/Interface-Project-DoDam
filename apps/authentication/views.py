@@ -3,7 +3,6 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
@@ -45,7 +44,6 @@ def register_user(request):
 
             msg = "회원가입이 완료되었습니다"
             success = True
-            # return redirect("/login/")
 
         else:
             msg = "입력 형식을 확인하세요"
@@ -53,6 +51,11 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
+
+def copyright(request):
+    return render(request, "home/copyright.html")
+
 
 def policy(request):
     return render(request, "accounts/policy.html")
