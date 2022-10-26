@@ -1,0 +1,123 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Trinity {% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .profile {
+            width:50%;
+            aspect-ratio:3/4;
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Header -->
+        <section class="section section-header pb-7 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">Trinity</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg">
+              <div class="container">
+                  <div class="row align-items-center">
+                      <div class="col-4">
+                          <div class="card border-0 p-3">
+                              <img src="{{ ASSETS_ROOT }}/img/team/profile-1.jpg" class="card-img rounded-circle profile">
+                              <div class="card-body text-center">
+                                  <h3 class="h5 card-title mt-3">박민정</h3>
+                                  <div class="btn-group">
+                                      <button class="btn btn-primary btn-icon-only" onclick="location.href='https://github.com/Park-Min-Jeong'">
+                                          <span class="fab fa-github"></span>
+                                      </button>
+                                      <button class="btn btn-primary btn-icon-only" onclick="location.href='mailto:minwjd1028@naver.com'">
+                                          <span class="fas fa-envelope-open"></span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-8">
+                          <div class="alert alert-light shadow p-4" role="alert" style="text-align:center;">
+                              이번 과정에서 웹사이트 개발을 처음 접했고 이를 완벽하게 소화하지 못한 채 프로젝트를 시작했기에
+                              처음에는 완성할 수 있을지 걱정됐습니다.
+                              프로젝트 도중에 여러 번 헤매기도 했지만 팀원들과 함께 찾아보고 공유하면서 답을 찾을 수 있었습니다.
+                              구성 요소가 하나씩 완성될 때마다 매우 기뻤고 뿌듯했습니다.
+                              힘들기도 했지만 그만큼 많이 성장할 수 있는 시간이었습니다.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row align-items-center">
+                      <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                          <div class="card border-0 p-3">
+                              <img src="{{ ASSETS_ROOT }}/img/team/profile-2.jpg" class="card-img rounded-circle profile">
+                              <div class="card-body text-center">
+                                  <h3 class="h5 card-title mt-3">박수은</h3>
+                                  <div class="btn-group">
+                                      <button class="btn btn-primary btn-icon-only" onclick="location.href='https://github.com/sooeun99'">
+                                          <span class="fab fa-github"></span>
+                                      </button>
+                                      <button class="btn btn-primary btn-icon-only" onclick="location.href='mailto:ppi06105@naver.com'">
+                                          <span class="fas fa-envelope-open"></span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-8">
+                          <div class="alert alert-light shadow p-4" role="alert" style="text-align:center;">
+                              프로젝트를 시작하면서 새로운 도전이라는 기대, 걱정과 함께 설렜습니다.
+                              1인분의 몫을 충분히 해내고 있지 못하는 생각에 낙담하고 누구보다 제가 저에게 모질게 대했던 것 같습니다.
+                              예상했던 것보다 더 많이 어려웠고 중간중간 한계도 있었지만 팀원들이 있었기에 좋은 결과물을 보여드릴 수 있었다고 생각합니다.
+                              날카로운 평가의 단어들이 아니라 옆에서 북돋아준 팀원들에게 감사의 말씀 전하고 싶습니다.
+                              성장할 수 있는 값진 시간들이었습니다.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row align-items-center">
+                      <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                          <div class="card border-0 p-3">
+                              <img src="{{ ASSETS_ROOT }}/img/team/profile-3.jpg" class="card-img rounded-circle profile">
+                              <div class="card-body text-center">
+                                  <h3 class="h5 card-title mt-3">서대훈</h3>
+                                  <div class="btn-group">
+                                      <button class="btn btn-primary btn-icon-only" onclick="location.href='https://github.com/dae-hunseo'">
+                                          <span class="fab fa-github"></span>
+                                      </button>
+                                      <button class="btn btn-primary btn-icon-only" onclick="location.href='mailto:0420sdh@naver.com'">
+                                          <span class="fas fa-envelope-open"></span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-8">
+                          <div class="alert alert-light shadow p-4" role="alert" style="text-align:center;">
+                              어린시절부터 상상만 했던 홈페이지를 실제로 만들어서 좋았습니다.
+                              평소에 어떤 문화재가 있는지만 알고 어디에 위치해 있는지는 잘 몰랐는데
+                              이번 프로젝트를 통해 알게 되면서 내 주변의 문화재에 관심을 가지게 되는 계기가 될 것 같습니다.
+                              또 혼자 개발하는 것과 달리 여럿이서 손발을 맞춰가며 개발하는 것이 쉽지는 않았지만 잘 모르는 것에 대해서
+                              팀원들의 도움을 받아가며 프로젝트를 완성해나갈 수 있었다는 점에서 좋은 경험이 될 것 같습니다.
+                          </div>
+                      </div
+                  </div>
+              </div>
+        </section>
+
+    </main>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
