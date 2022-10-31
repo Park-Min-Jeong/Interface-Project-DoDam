@@ -64,7 +64,3 @@ def policy(request):
 
 def policy_check(request):
     return render(request, "accounts/policy-check.html")
-
-
-def newPw(request):
-    return render(request, "accounts/newPw.html")

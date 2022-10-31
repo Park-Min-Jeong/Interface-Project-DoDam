@@ -1,14 +1,16 @@
 # 역사 도담 - Trinity
 - 멀티캠퍼스
-- 융복합 프로젝트형 빅데이터 분석 서비스 개발
+- K-Digital 융복합 프로젝트형 빅데이터 분석 서비스 개발
 - 인터페이스 개발 프로젝트
 - 기간: 2022-09-28 ~ 2022-10-26
+
+## 사이트 주소
+https://historydodam.pythonanywhere.com/
 
 ## 데이터 전처리
 https://github.com/Park-Min-Jeong/Interface-Project-DataPreProcessing
 
 ## Code-base structure
-
 ```bash
 < PROJECT ROOT >
    |
@@ -68,4 +70,6 @@ https://github.com/Park-Min-Jeong/Interface-Project-DataPreProcessing
    |-- ************************************************************************
 ```
 
-<br />
+## Bootstrap Template
+Django Pixel Lite - AppSeed
+https://github.com/app-generator/django-pixel

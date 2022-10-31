@@ -2,7 +2,6 @@
 
 {% block title %} 탐방 경로 {% endblock %}
 
-<!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
     <style>
         .info-window {
@@ -72,7 +71,6 @@
 
 {% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {% include 'includes/kakaomap.html' %}
@@ -109,11 +107,11 @@
 
                 var polyline = new kakao.maps.Polyline({
                     path: path,
-                    strokeWeight: 5, //줄 굵기
-                    strokeColor: "#FF0000", //줄 색상 //#2A354F
-                    strokeOpacity: 1, //줄 투명도
-                    strokeStyle: "solid", //실선
-                    endArrow: true //화살표 유무
+                    strokeWeight: 5,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 1,
+                    strokeStyle: "solid",
+                    endArrow: true
                 });
                 polyline.setMap(map);
             };

@@ -24,7 +24,6 @@
 
         {% include 'includes/preloader.html' %}
 
-        <!-- Header -->
         <section class="section section-header pb-7 bg-primary text-white">
             <div class="container">
                 <div class="row justify-content-center">
@@ -86,9 +85,8 @@
 
 {% block javascripts %}
 <script>
-    function displayAnswerForm(){ //visitorapp의 visitor_crud.html 51번째 라인 참고
-        //document.getElementsByName("answerForm").style.display = 'block'; //getElementById면 이렇게 함
-        var d = document.getElementsByName("answerForm")[0]; //강사님께 물어서 이렇게 함.
+    function displayAnswerForm(){
+        var d = document.getElementsByName("answerForm")[0];
         d.style.display = 'block';
     }
 </script>

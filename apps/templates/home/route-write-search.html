@@ -12,7 +12,6 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
-                        <!-- 키워드 입력폼 -->
                         <form method="GET" action="#">
                             <div class="input-group text-center text-md-center my-4">
                                 <input type="text" class="form-control" name="keyword" placeholder="검색어 입력" aria-label="SearchRoute" aria-describedby="basic-addon1">
@@ -21,7 +20,6 @@
                             <input name="order" type="hidden" value="{{ order }}">
                         </form>
 
-                        <!-- 키워드 & 검색 건수 표시 -->
                         <div class="row mb-4">
                             {% if keyword %}
                                 <div class="col text-start">검색어: {{ keyword }}</div>
@@ -31,7 +29,6 @@
                             <div class="col text-end">총 {{ resultlen }}건</div>
                         </div>
 
-                        <!-- 검색 결과 타일 -->
                         {% for data in page_obj %}
                             <div class="card shadow my-2" style="height:130px;" id="card{{ data.ccbaCpno }}">
                                 <div class="row g-0 align-item-start">
@@ -49,7 +46,6 @@
                             </div>
                         {% endfor %}
 
-                        <!-- paginator -->
                         {% include "includes/paginator.html" %}
                     </div>
                 </div>
